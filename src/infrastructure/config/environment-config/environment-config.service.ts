@@ -8,30 +8,30 @@ export class EnvironmentConfigService implements DatabaseConfig {
     constructor(private configService: ConfigService) {}
 
     getDatabaseHost(): string {
-        return this.configService.get<string>('DATABASE_HOST');
+        return this.configService.get<string>('POSTGRES_HOST');
     }
 
     getDatabasePort(): number {
-        return this.configService.get<number>('DATABASE_PORT');
+        return this.configService.get<number>('POSTGRES_PORT');
     }
 
     getDatabaseUser(): string {
-        return this.configService.get<string>('DATABASE_USER');
+        return this.configService.get<string>('POSTGRES_USER');
     }
 
     getDatabasePassword(): string {
-        return this.configService.get<string>('DATABASE_PASSWORD');
+        return this.configService.get<string>('POSTGRES_PASSWORD');
     }
 
     getDatabaseName(): string {
-        return this.configService.get<string>('DATABASE_NAME');
+        return this.configService.get<string>('POSTGRES_DB');
     }
 
     getDatabaseSchema(): string {
-        return this.configService.get<string>('DATABASE_SCHEMA');
+        return this.configService.get<string>('POSTGRES_SCHEMA');
     }
 
     getDatabaseSync(): boolean {
-        return this.configService.get<boolean>('DATABASE_SYNC');
+        return this.configService.get<boolean>('POSTGRES_SYNCHRONIZE');
     }
 }

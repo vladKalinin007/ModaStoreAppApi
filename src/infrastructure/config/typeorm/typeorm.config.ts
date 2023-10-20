@@ -4,16 +4,16 @@ dotenv.config();
 
 const config = new DataSource({
     type: 'postgres',
-    host: process.env.DATABASE_HOST,
+    host: process.env.POSTGRES_HOST,
     port: 5432,
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    entities: [__dirname + './../../**/*.entity{.ts,.js}'],
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    entities: ['dist/**/*.entity{.ts,.js}'],
     synchronize: true,
-    schema: process.env.DATABASE_SCHEMA,
+    schema: process.env.POSTGRES_SCHEMA,
     migrationsRun: true,
-    migrations: ['database/migrations/**/*{.ts,.js}'],
+    migrations: ['dist/infrastructure/database/migrations/**/*{.ts,.js}'],
 });
 
 config

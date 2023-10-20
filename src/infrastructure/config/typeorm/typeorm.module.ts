@@ -13,16 +13,17 @@ export const getTypeOrmModuleOptions = (
         username: config.getDatabaseUser(),
         password: config.getDatabasePassword(),
         database: config.getDatabaseName(),
-        entities: [__dirname + './../../**/*.entity{.ts,.js}'],
+        entities: ['dist/**/*.entity{.ts,.js}'],
         autoLoadEntities: true,
         synchronize: false,
         schema: process.env.DATABASE_SCHEMA,
         migrationsRun: true,
-        migrations: [__dirname + '/migrations**/*{.ts,.js}'],
+        migrations: ['dist/infrastructure/database/migrations/**/*{.ts,.js}'],
         cli: {
-            migrationsDir: 'src/migrations',
+            migrationsDir: 'src/migrations'
         },
     } as TypeOrmModuleOptions);
+
 @Module({
     imports: [
         TypeOrmModule.forRootAsync({
