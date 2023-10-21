@@ -3,9 +3,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
 import { EnvironmentConfigService } from '../environment-config/environment-config.service';
 
-export const getTypeOrmModuleOptions = (
-    config: EnvironmentConfigService,
-): TypeOrmModuleOptions =>
+export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeOrmModuleOptions =>
     ({
         type: 'postgres',
         host: config.getDatabaseHost(),
@@ -15,13 +13,8 @@ export const getTypeOrmModuleOptions = (
         database: config.getDatabaseName(),
         entities: ['dist/**/*.entity{.ts,.js}'],
         autoLoadEntities: true,
-        synchronize: false,
-        schema: process.env.DATABASE_SCHEMA,
-        migrationsRun: true,
-        migrations: ['dist/infrastructure/database/migrations/**/*{.ts,.js}'],
-        cli: {
-            migrationsDir: 'src/migrations'
-        },
+        synchronize: true,
+
     } as TypeOrmModuleOptions);
 
 @Module({

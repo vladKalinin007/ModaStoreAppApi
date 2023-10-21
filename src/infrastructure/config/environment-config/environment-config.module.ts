@@ -5,10 +5,7 @@ import {EnvironmentConfigService} from "./environment-config.service";
 @Module({
     imports: [
         ConfigModule.forRoot({
-            ignoreEnvFile:
-                !(process.env.NODE_ENV === 'development' ||
-                    process.env.NODE_ENV === 'test'),
-            isGlobal: true,
+            envFilePath: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
         }),
     ],
     providers: [EnvironmentConfigService],
