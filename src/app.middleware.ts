@@ -1,11 +1,15 @@
 import {INestApplication} from "@nestjs/common";
-import passport from "passport";
 
 export function middleware(app: INestApplication): INestApplication {
-    const isProduction = process.env.NODE_ENV === 'production';
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+    app.use((req, res, next) => {
+        if (req.url === '/') {
+            res.redirect(301, '/api');
+        } else {
+            next();
+        }
+    });
+
     app.enableCors();
 
     return app;

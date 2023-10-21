@@ -3,12 +3,15 @@ import { AppModule } from './app.module';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 import * as process from "process";
 import * as dotenv from 'dotenv';
+import {middleware} from "./app.middleware";
 
 async function bootstrap() {
 
   dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
   const app = await NestFactory.create(AppModule);
 
+  middleware(app);
 
   const config = new DocumentBuilder()
       .setTitle('ModaStore swagger API documentation')
@@ -16,9 +19,11 @@ async function bootstrap() {
       .setVersion('1.0')
       .build();
   const document = SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup('api', app, document);
-  app.enableCors();
-  await app.listen(process.env.PORT, () => console.log(`ModaStore API is listening on port ${process.env.PORT}`));
+
+
+  await app.listen(process.env.PORT, '0.0.0.0');
 
   console.log(process.env);
 
