@@ -6,7 +6,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 @Module({
   imports: [
       ApiModule,
-      EnvironmentConfigModule,
+      // EnvironmentConfigModule,
   ],
   providers: [],
 })

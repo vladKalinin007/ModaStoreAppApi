@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import {InfrastructureModule} from "../infrastructure/infrastructure.module";
-import {GetProductQueryHandler} from "./use-cases/catalog/product/queries/handlers/get-product.queryhandler";
+// import {GetProductQueryHandler} from "./use-cases/catalog/product/queries/handlers/get-product.queryhandler";
 import {CqrsModule} from "@nestjs/cqrs";
 import {GetCategoriesQueryHandler} from "./use-cases/catalog/category/queries/handlers/get-categories.queryhandler";
 
@@ -11,13 +11,13 @@ import {GetCategoriesQueryHandler} from "./use-cases/catalog/category/queries/ha
         InfrastructureModule,
     ],
     providers: [
-        GetProductQueryHandler,
+        // GetProductQueryHandler,
         GetCategoriesQueryHandler,
     ],
     exports: [
         CqrsModule,
         InfrastructureModule,
-        GetProductQueryHandler,
+        // GetProductQueryHandler,
         GetCategoriesQueryHandler,
     ]
 })

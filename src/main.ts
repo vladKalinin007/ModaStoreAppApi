@@ -6,9 +6,8 @@ import * as dotenv from 'dotenv';
 
 async function bootstrap() {
 
+  dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
   const app = await NestFactory.create(AppModule);
-  dotenv.config();
-
 
 
   const config = new DocumentBuilder()
@@ -22,5 +21,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT, () => console.log(`ModaStore API is listening on port ${process.env.PORT}`));
 
   console.log(process.env);
+
+
 }
 bootstrap();

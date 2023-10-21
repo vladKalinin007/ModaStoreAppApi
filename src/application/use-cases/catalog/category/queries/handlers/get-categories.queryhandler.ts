@@ -9,7 +9,8 @@ export class GetCategoriesQueryHandler implements IQueryHandler<GetCategoriesQue
     constructor(private _categoryService: CategoryService) {}
 
     async execute(query: GetCategoriesQuery): Promise<CategoryDto[]> {
-        const categories: Category[] = await this._categoryService.getAllCategories();
+        // const categories: Category[] = await this._categoryService.getAllCategories();
+        const categories = await this._categoryService.getCategories();
         return categories.map(category => CategoryDto.from(category));
     }
 

@@ -3,6 +3,7 @@ import {QueryBus} from "@nestjs/cqrs";
 import {GetCategoriesQuery} from "../../application/use-cases/catalog/category/queries/models/get-category.query";
 import {ApiResponse, ApiTags} from "@nestjs/swagger";
 import {Get} from "@nestjs/common";
+import {CategoryDto} from "../dto/catalog/category.dto";
 
 @ApiTags("Categories")
 export class CategoryController extends BaseController {
@@ -13,7 +14,7 @@ export class CategoryController extends BaseController {
 
     @Get("/categories")
     @ApiResponse({ status: 200, description: 'Returns all categories' })
-    getCategories() {
+    public getCategories(): Promise<CategoryDto[]> {
         return this._queryBus.execute(new GetCategoriesQuery());
     }
 }
