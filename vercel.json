@@ -8,8 +8,8 @@
   ],
   "rewrites": [
     {
-      "source": "src/:path*",
-      "destination": ":path*"
+      "source": "/api/src/:path*",
+      "destination": "/api/:path*"
     }
   ],
   "routes": [
