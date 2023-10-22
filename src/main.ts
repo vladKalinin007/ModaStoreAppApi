@@ -5,6 +5,7 @@ import * as process from "process";
 import * as dotenv from 'dotenv';
 import {middleware} from "./app.middleware";
 
+
 async function bootstrap() {
 
   dotenv.config({ path: `.env.${process.env.NODE_ENV}` });

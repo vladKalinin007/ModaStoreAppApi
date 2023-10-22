@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 // import {ProductService} from "./services/catalog/product.service";
 import {CategoryService} from "./services/catalog/category.service";
 import {PrismaService} from "./database/prisma.service";
+import {BasketService} from "./services/customer/basket.service";
 
 @Module({
     imports: [
@@ -10,12 +11,14 @@ import {PrismaService} from "./database/prisma.service";
     providers: [
         PrismaService,
         // ProductService,
-        CategoryService
+        CategoryService,
+        BasketService
     ],
     exports: [
         // ProductService,
         CategoryService,
-        PrismaService
+        PrismaService,
+        BasketService
     ]
 
 })
