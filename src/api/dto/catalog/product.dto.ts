@@ -1,9 +1,11 @@
-import {Product} from "../../../domain/entities/catalog/product.entity";
 import {SizeDto} from "../common/size.dto";
 import {ColorDto} from "../common/color.dto";
 import {ProductReviewDto} from "./product-review.dto";
+import {Product} from "../../../domain/entities/catalog/product.entity";
 
-export class ProductDto {
+
+
+export class ProductDto  {
 
     id: string;
     name?: string;
@@ -94,7 +96,7 @@ export class ProductDto {
         });
     }
 
-    static from(product: Product): ProductDto {
+    static from(product): ProductDto {
         return new ProductDto(product);
     }
 }

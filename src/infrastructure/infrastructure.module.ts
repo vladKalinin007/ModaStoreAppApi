@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-// import {ProductService} from "./services/catalog/product.service";
+import {ProductService} from "./services/catalog/product.service";
 import {CategoryService} from "./services/catalog/category.service";
 import {PrismaService} from "./database/prisma.service";
 import {BasketService} from "./services/customer/basket.service";
@@ -10,12 +10,12 @@ import {BasketService} from "./services/customer/basket.service";
     ],
     providers: [
         PrismaService,
-        // ProductService,
+        ProductService,
         CategoryService,
         BasketService
     ],
     exports: [
-        // ProductService,
+        ProductService,
         CategoryService,
         PrismaService,
         BasketService
