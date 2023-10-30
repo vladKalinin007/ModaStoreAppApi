@@ -1,4 +1,4 @@
-import { BasketItem } from '../../../domain/entities/customer/basket-item.model';
+import { BasketItem } from '../../../domain/models/customer/basket-item.model';
 
 export class BasketItemDto {
   id: string;

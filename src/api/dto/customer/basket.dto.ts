@@ -1,4 +1,4 @@
-import { Basket } from '../../../domain/entities/customer/basket.model';
+import { Basket } from '../../../domain/models/customer/basket.model';
 import { BasketItemDto } from './basket-item.dto';
 
 export class BasketDto {

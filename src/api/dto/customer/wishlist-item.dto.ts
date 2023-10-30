@@ -1,4 +1,4 @@
-import { WishlistItem } from '../../../domain/entities/customer/wishlist-item.model';
+import { WishlistItem } from '../../../domain/models/customer/wishlist-item.model';
 
 export class WishlistItemDto {
   id: string;

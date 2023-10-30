@@ -8,7 +8,7 @@ import { UpdateBasketCommand } from '../../application/use-cases/customer/basket
 import { DeleteBasketCommand } from '../../application/use-cases/customer/basket/commands/delete-basket.command/command/delete-basket.command';
 import { GetBasketByIdQuery } from '../../application/use-cases/customer/basket/queries/get-basket-by-id.query/query/get-basket-by-id.query';
 
-@ApiTags('Basket')
+@ApiTags('Basket endpoints')
 export class BasketController extends BaseController {
   constructor(
     private readonly _queryBus: QueryBus,
@@ -19,7 +19,7 @@ export class BasketController extends BaseController {
 
   @Get('/basket/:id')
   @ApiResponse({ status: 200, description: 'Returns the basket' })
-  async get(@Param('id') id: string): Promise<BasketDto> {
+  async getBasket(@Param('id') id: string): Promise<BasketDto> {
     const basket = await this._queryBus.execute(new GetBasketByIdQuery(id));
 
     if (!basket) {

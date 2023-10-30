@@ -19,7 +19,7 @@ export class WishlistController extends BaseController {
 
   @Get('/wishlist/:id')
   @ApiResponse({ status: 200, description: 'Returns the full wishlist' })
-  async get(@Param('id') id: string): Promise<WishlistDto> {
+  async getWishlist(@Param('id') id: string): Promise<WishlistDto> {
     const wishlist = await this._queryBus.execute(new GetWishlistByIdQuery(id));
 
     if (!wishlist) {

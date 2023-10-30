@@ -1,7 +1,7 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { Wishlist } from '../../../domain/entities/customer/wishlist.model';
+import { Wishlist } from '../../../domain/models/customer/wishlist.model';
 
 @Injectable()
 export class WishlistService {

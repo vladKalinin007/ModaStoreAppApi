@@ -1,7 +1,7 @@
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { Basket } from '../../../domain/entities/customer/basket.model';
+import { Basket } from '../../../domain/models/customer/basket.model';
 
 @Injectable()
 export class BasketService {
