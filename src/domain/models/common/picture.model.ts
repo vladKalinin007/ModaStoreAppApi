@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
-import { ProductPicturesModel } from 'prisma/generated/models';
+import { ProductPicturesModel } from '../../../../prisma/generated/models';
 
 export class PictureModel {
   @IsNotEmpty()

@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetCategoriesQuery } from '../query/get-categories.query';
 import { CategoryService } from '../../../../../../../infrastructure/services/catalog/category.service';
-import { CategoryDto } from 'src/api/dto';
+import { CategoryDto } from 'api/dto';
 
 @QueryHandler(GetCategoriesQuery)
 export class GetCategoriesQueryHandler

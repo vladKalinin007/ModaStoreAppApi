@@ -21,7 +21,7 @@ import {
   SizeDto,
 } from '..';
 import { Prisma } from '@prisma/client';
-import { ProductModel } from 'src/domain/models/catalog/product.model';
+import { ProductModel } from 'domain/models/catalog/product.model';
 
 export class ProductDto {
   @ApiProperty({ required: true })

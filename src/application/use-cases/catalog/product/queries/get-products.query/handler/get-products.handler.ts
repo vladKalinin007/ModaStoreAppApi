@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetProductsQuery } from '../query/get-products.query';
 import { ProductService } from '../../../../../../../infrastructure/services/catalog/product.service';
-import { ProductDto } from 'src/api/dto';
-import { ProductModel } from 'src/domain/models/catalog/product.model';
+import { ProductDto } from 'api/dto';
+import { ProductModel } from 'domain/models/catalog/product.model';
 
 @QueryHandler(GetProductsQuery)
 export class GetProductsQueryHandler

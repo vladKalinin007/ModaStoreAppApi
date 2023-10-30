@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
 import { ProductDto, CategoryProductTypeDto } from '..';
-import { CategoryModel } from 'src/domain/models/catalog/category.model';
+import { CategoryModel } from 'domain/models/catalog/category.model';
 
 export class CategoryDto {
   @ApiProperty({ required: true })

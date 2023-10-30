@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 import { ProductColorsDto } from '..';
-import { ProductColorsModel } from 'src/domain/models/catalog/product-colors.model';
+import { ProductColorsModel } from 'domain/models/catalog/product-colors.model';
 
 export class ColorDto {
   @ApiProperty({ required: true })
