@@ -3,7 +3,7 @@ import { BaseController } from './base.controller';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { QueryBus } from '@nestjs/cqrs';
 import { GetProductsQuery } from '../../application/use-cases/catalog/product/queries/get-products.query/query/get-products.query';
-import { ProductDto } from '../../../prisma/generated/dtos';
+import { ProductDto } from 'api/dto';
 
 @ApiTags('Product endpoints')
 export class ProductController extends BaseController {
