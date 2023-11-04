@@ -10,9 +10,10 @@ import { UpdateBasketHandler } from './use-cases/customer/basket/commands/update
 import { GetWishlistByIdHandler } from './use-cases/customer/wishlist/queries/get-wishlist-by-id.query/handler/get-wishlist-by-id.handler';
 import { CreateWishlistHandler } from './use-cases/customer/wishlist/commands/create-wishlist.command/handler/create-wishlist.handler';
 import { UpdateWishlistHandler } from './use-cases/customer/wishlist/commands/update-wishlist.command/handler/update-wishlist.handler';
-import { DeleteWishlistHandler } from './use-cases/customer/wishlist/commands/delete-wishlist.command/handler/delete-wishlist.handler';
+// import { DeleteWishlistHandler } from './use-cases/customer/wishlist/commands/delete-wishlist.command/handler/delete-wishlist.handler';
 import { LoginHandler } from './use-cases/identity/authentication/commands/login.command/handler/login.handler';
 import { RegisterHandler } from './use-cases/identity/authentication/commands/register.command/handler/register.handler';
+import { GetProductBrandsHandler } from './use-cases/catalog/product-brand/queries/get-product-brands.query/handler/get-product-brands.handler';
 
 @Module({
   imports: [CqrsModule, InfrastructureModule],
@@ -26,9 +27,10 @@ import { RegisterHandler } from './use-cases/identity/authentication/commands/re
     GetWishlistByIdHandler,
     CreateWishlistHandler,
     UpdateWishlistHandler,
-    DeleteWishlistHandler,
+    // DeleteWishlistHandler,
     LoginHandler,
     RegisterHandler,
+    GetProductBrandsHandler,
   ],
   exports: [
     CqrsModule,
@@ -42,9 +44,10 @@ import { RegisterHandler } from './use-cases/identity/authentication/commands/re
     GetWishlistByIdHandler,
     CreateWishlistHandler,
     UpdateWishlistHandler,
-    DeleteWishlistHandler,
+    // DeleteWishlistHandler,
     LoginHandler,
     RegisterHandler,
+    GetProductBrandsHandler,
   ],
 })
 export class ApplicationModule {}

@@ -6,10 +6,13 @@ import { BasketService } from './services/customer/basket.service';
 import { WishlistService } from './services/customer/wishlist.service';
 import { AuthService } from './services/identity/auth.service';
 import { DeliveryService } from './services/customer/delivery.service';
+import { ProductBrandSerivce } from './services/catalog/product-brand.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [],
   providers: [
+    JwtService,
     PrismaService,
     ProductService,
     CategoryService,
@@ -17,6 +20,7 @@ import { DeliveryService } from './services/customer/delivery.service';
     WishlistService,
     DeliveryService,
     AuthService,
+    ProductBrandSerivce,
   ],
   exports: [
     ProductService,
@@ -26,6 +30,7 @@ import { DeliveryService } from './services/customer/delivery.service';
     WishlistService,
     DeliveryService,
     AuthService,
+    ProductBrandSerivce,
   ],
 })
 export class InfrastructureModule {}
