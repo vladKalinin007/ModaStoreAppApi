@@ -14,6 +14,7 @@ import { UpdateWishlistHandler } from './use-cases/customer/wishlist/commands/up
 import { LoginHandler } from './use-cases/identity/authentication/commands/login.command/handler/login.handler';
 import { RegisterHandler } from './use-cases/identity/authentication/commands/register.command/handler/register.handler';
 import { GetProductBrandsHandler } from './use-cases/catalog/product-brand/queries/get-product-brands.query/handler/get-product-brands.handler';
+import { GetProductTypesHandler } from './use-cases/catalog/product-type/queries/get-product-types.query/handler/get-product-types.handler';
 
 @Module({
   imports: [CqrsModule, InfrastructureModule],
@@ -31,6 +32,7 @@ import { GetProductBrandsHandler } from './use-cases/catalog/product-brand/queri
     LoginHandler,
     RegisterHandler,
     GetProductBrandsHandler,
+    GetProductTypesHandler,
   ],
   exports: [
     CqrsModule,
@@ -48,6 +50,7 @@ import { GetProductBrandsHandler } from './use-cases/catalog/product-brand/queri
     LoginHandler,
     RegisterHandler,
     GetProductBrandsHandler,
+    GetProductTypesHandler,
   ],
 })
 export class ApplicationModule {}
