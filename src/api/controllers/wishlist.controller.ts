@@ -1,5 +1,5 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from './base.controller';
 import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { WishlistDto } from '../dto/customer/wishlist.dto';
@@ -18,7 +18,6 @@ export class WishlistController extends BaseController {
   }
 
   @Get('/wishlist/:id')
-  @ApiResponse({ status: 200, description: 'Returns the full wishlist' })
   async getWishlist(@Param('id') id: string): Promise<WishlistDto> {
     const wishlist = await this._queryBus.execute(new GetWishlistByIdQuery(id));
 
@@ -32,7 +31,6 @@ export class WishlistController extends BaseController {
   }
 
   @Post('/wishlist/:id')
-  @ApiResponse({ status: 200, description: 'Creates the wishlist' })
   async createWishlist(
     @Body() wishlistDto: WishlistDto,
     @Param('id') id: string,
@@ -52,8 +50,8 @@ export class WishlistController extends BaseController {
     );
   }
 
-  @Delete('/wishlist/:key')
-  async deleteWishlist(@Param('key') key: string): Promise<void> {
+  @Delete('/wishlist/:id')
+  async deleteWishlist(@Param('id') key: string): Promise<void> {
     await this._commandBus.execute(new DeleteWishlistCommand(key));
   }
 }

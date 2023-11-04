@@ -4,6 +4,8 @@ import { CategoryService } from './services/catalog/category.service';
 import { PrismaService } from './database/prisma.service';
 import { BasketService } from './services/customer/basket.service';
 import { WishlistService } from './services/customer/wishlist.service';
+import { AuthService } from './services/identity/auth.service';
+import { DeliveryService } from './services/customer/delivery.service';
 
 @Module({
   imports: [],
@@ -13,6 +15,8 @@ import { WishlistService } from './services/customer/wishlist.service';
     CategoryService,
     BasketService,
     WishlistService,
+    DeliveryService,
+    AuthService,
   ],
   exports: [
     ProductService,
@@ -20,6 +24,8 @@ import { WishlistService } from './services/customer/wishlist.service';
     PrismaService,
     BasketService,
     WishlistService,
+    DeliveryService,
+    AuthService,
   ],
 })
 export class InfrastructureModule {}

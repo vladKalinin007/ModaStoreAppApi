@@ -11,6 +11,8 @@ import { GetWishlistByIdHandler } from './use-cases/customer/wishlist/queries/ge
 import { CreateWishlistHandler } from './use-cases/customer/wishlist/commands/create-wishlist.command/handler/create-wishlist.handler';
 import { UpdateWishlistHandler } from './use-cases/customer/wishlist/commands/update-wishlist.command/handler/update-wishlist.handler';
 import { DeleteWishlistHandler } from './use-cases/customer/wishlist/commands/delete-wishlist.command/handler/delete-wishlist.handler';
+import { LoginHandler } from './use-cases/identity/authentication/commands/login.command/handler/login.handler';
+import { RegisterHandler } from './use-cases/identity/authentication/commands/register.command/handler/register.handler';
 
 @Module({
   imports: [CqrsModule, InfrastructureModule],
@@ -25,6 +27,8 @@ import { DeleteWishlistHandler } from './use-cases/customer/wishlist/commands/de
     CreateWishlistHandler,
     UpdateWishlistHandler,
     DeleteWishlistHandler,
+    LoginHandler,
+    RegisterHandler,
   ],
   exports: [
     CqrsModule,
@@ -39,6 +43,8 @@ import { DeleteWishlistHandler } from './use-cases/customer/wishlist/commands/de
     CreateWishlistHandler,
     UpdateWishlistHandler,
     DeleteWishlistHandler,
+    LoginHandler,
+    RegisterHandler,
   ],
 })
 export class ApplicationModule {}
