@@ -15,6 +15,7 @@ import { LoginHandler } from './use-cases/identity/authentication/commands/login
 import { RegisterHandler } from './use-cases/identity/authentication/commands/register.command/handler/register.handler';
 import { GetProductBrandsHandler } from './use-cases/catalog/product-brand/queries/get-product-brands.query/handler/get-product-brands.handler';
 import { GetProductTypesHandler } from './use-cases/catalog/product-type/queries/get-product-types.query/handler/get-product-types.handler';
+import { GetPicturesByTypeHandler } from './use-cases/common/pictures/queries/get-pictures-by-type.query/handler/get-pictures-by-type.handler';
 
 @Module({
   imports: [CqrsModule, InfrastructureModule],
@@ -33,6 +34,7 @@ import { GetProductTypesHandler } from './use-cases/catalog/product-type/queries
     RegisterHandler,
     GetProductBrandsHandler,
     GetProductTypesHandler,
+    GetPicturesByTypeHandler,
   ],
   exports: [
     CqrsModule,
@@ -51,6 +53,7 @@ import { GetProductTypesHandler } from './use-cases/catalog/product-type/queries
     RegisterHandler,
     GetProductBrandsHandler,
     GetProductTypesHandler,
+    GetPicturesByTypeHandler,
   ],
 })
 export class ApplicationModule {}

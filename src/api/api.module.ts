@@ -7,7 +7,7 @@ import { BasketController } from './controllers/basket.controller';
 import { WishlistController } from './controllers/wishlist.controller';
 import { AuthController } from './controllers/auth.controller';
 import { PaymentController } from './controllers/payment.controller';
-import { PicturesController } from './controllers/pictures.controller';
+import { PictureController } from './controllers/pictures.controller';
 import { UserController } from './controllers/user.controller';
 import { OrderController } from './controllers/order.controller';
 import { ProductTypeController } from './controllers/product-type.controller';
@@ -23,7 +23,7 @@ import { SeenProductController } from './controllers/seen-product.controller';
     WishlistController,
     AuthController,
     PaymentController,
-    PicturesController,
+    PictureController,
     UserController,
     OrderController,
     ProductTypeController,

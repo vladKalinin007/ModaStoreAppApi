@@ -9,6 +9,7 @@ import { DeliveryService } from './services/customer/delivery.service';
 import { ProductBrandSerivce } from './services/catalog/product-brand.service';
 import { JwtService } from '@nestjs/jwt';
 import { ProductTypeService } from './services/catalog/product-type.service';
+import { PictureService } from './services/common/picture.service';
 
 @Module({
   imports: [],
@@ -23,6 +24,7 @@ import { ProductTypeService } from './services/catalog/product-type.service';
     AuthService,
     ProductBrandSerivce,
     ProductTypeService,
+    PictureService,
   ],
   exports: [
     ProductService,
@@ -34,6 +36,7 @@ import { ProductTypeService } from './services/catalog/product-type.service';
     AuthService,
     ProductBrandSerivce,
     ProductTypeService,
+    PictureService,
   ],
 })
 export class InfrastructureModule {}

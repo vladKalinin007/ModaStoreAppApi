@@ -1,9 +1,11 @@
 import { QueryBus } from '@nestjs/cqrs';
 import { BaseController } from './base.controller';
 import { Get, Param } from '@nestjs/common';
-import { GetPicturesByTypeQuery } from 'application/use-cases/common/pictures/queries/query/get-picture-by-type.query';
+import { GetPicturesByTypeQuery } from 'application/use-cases/common/pictures/queries/get-pictures-by-type.query/query/get-pictures-by-type.query';
+import { ApiTags } from '@nestjs/swagger';
 
-export class PicturesController extends BaseController {
+@ApiTags('Pictures endpoints')
+export class PictureController extends BaseController {
   constructor(private readonly _queryBus: QueryBus) {
     super();
   }
