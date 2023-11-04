@@ -4,7 +4,7 @@ import { BasketItemDto } from './basket-item.dto';
 export class BasketDto {
   id?: string | null = null;
   items: BasketItemDto[] = [];
-  deliveryMethodId?: number | null = null;
+  deliveryMethodId?: string | null = null;
   clientSecret?: string | null = null;
   paymentIntentId?: string | null = null;
   shippingPrice?: number | null = null;

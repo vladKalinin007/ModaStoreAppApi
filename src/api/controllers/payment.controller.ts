@@ -2,7 +2,9 @@ import { CommandBus } from '@nestjs/cqrs';
 import { BaseController } from './base.controller';
 import { Param, Post } from '@nestjs/common';
 import { CreateOrUpdatePaymentIntentCommand } from 'application/use-cases/customer/payment/commands/create-or-update-payment-intent.command/command/create-or-update-payment-intent.command';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Payment endpoints')
 export class PaymentController extends BaseController {
   constructor(private readonly _commandBus: CommandBus) {
     super();

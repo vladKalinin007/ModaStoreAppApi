@@ -10,11 +10,14 @@ import { ProductBrandSerivce } from './services/catalog/product-brand.service';
 import { JwtService } from '@nestjs/jwt';
 import { ProductTypeService } from './services/catalog/product-type.service';
 import { PictureService } from './services/common/picture.service';
+import { PaymentService } from './services/customer/payment.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [],
   providers: [
     JwtService,
+    ConfigService,
     PrismaService,
     ProductService,
     CategoryService,
@@ -25,6 +28,7 @@ import { PictureService } from './services/common/picture.service';
     ProductBrandSerivce,
     ProductTypeService,
     PictureService,
+    PaymentService,
   ],
   exports: [
     ProductService,
@@ -37,6 +41,7 @@ import { PictureService } from './services/common/picture.service';
     ProductBrandSerivce,
     ProductTypeService,
     PictureService,
+    PaymentService,
   ],
 })
 export class InfrastructureModule {}

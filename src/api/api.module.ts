@@ -13,6 +13,8 @@ import { OrderController } from './controllers/order.controller';
 import { ProductTypeController } from './controllers/product-type.controller';
 import { ProductBrandController } from './controllers/product-brand.controller';
 import { SeenProductController } from './controllers/seen-product.controller';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from './filters/all-exeptions.filter';
 
 @Module({
   imports: [ApplicationModule],
@@ -29,6 +31,12 @@ import { SeenProductController } from './controllers/seen-product.controller';
     ProductTypeController,
     ProductBrandController,
     SeenProductController,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
   ],
 })
 export class ApiModule {}

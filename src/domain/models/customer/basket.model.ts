@@ -3,7 +3,7 @@ import { BasketItem } from './basket-item.model';
 
 export class Basket extends BaseEntity {
   items: BasketItem[] = [];
-  deliveryMethodId?: number;
+  deliveryMethodId?: string;
   clientSecret?: string;
   paymentIntentId?: string;
   shippingPrice?: number;

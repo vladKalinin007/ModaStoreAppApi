@@ -1,3 +1,4 @@
+import { CreateOrUpdatePaymentIntentHandler } from './use-cases/customer/payment/commands/create-or-update-payment-intent.command/handler/create-or-update-payment-intent.handler';
 import { Module } from '@nestjs/common';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -35,6 +36,7 @@ import { GetPicturesByTypeHandler } from './use-cases/common/pictures/queries/ge
     GetProductBrandsHandler,
     GetProductTypesHandler,
     GetPicturesByTypeHandler,
+    CreateOrUpdatePaymentIntentHandler,
   ],
   exports: [
     CqrsModule,
@@ -54,6 +56,7 @@ import { GetPicturesByTypeHandler } from './use-cases/common/pictures/queries/ge
     GetProductBrandsHandler,
     GetProductTypesHandler,
     GetPicturesByTypeHandler,
+    CreateOrUpdatePaymentIntentHandler,
   ],
 })
 export class ApplicationModule {}
