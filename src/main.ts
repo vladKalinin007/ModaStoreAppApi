@@ -13,9 +13,9 @@ async function bootstrap() {
   middleware(app);
 
   const config = new DocumentBuilder()
-    .setTitle('ModaStore swagger API documentation')
-    .setDescription('The moda store API description')
+    .setTitle('ModaStore REST API endpoints')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
 
