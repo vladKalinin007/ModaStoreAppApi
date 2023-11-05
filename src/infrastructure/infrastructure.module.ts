@@ -12,6 +12,7 @@ import { ProductTypeService } from './services/catalog/product-type.service';
 import { PictureService } from './services/common/picture.service';
 import { PaymentService } from './services/customer/payment.service';
 import { ConfigService } from '@nestjs/config';
+import { SeenProductService } from './services/customer/seen-product.service';
 
 @Module({
   imports: [],
@@ -29,6 +30,7 @@ import { ConfigService } from '@nestjs/config';
     ProductTypeService,
     PictureService,
     PaymentService,
+    SeenProductService,
   ],
   exports: [
     ProductService,
@@ -42,6 +44,7 @@ import { ConfigService } from '@nestjs/config';
     ProductTypeService,
     PictureService,
     PaymentService,
+    SeenProductService,
   ],
 })
 export class InfrastructureModule {}

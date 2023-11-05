@@ -1,6 +1,6 @@
 import { ICommand } from '@nestjs/cqrs';
-import { SeenProductDto } from 'api/dto/customer/seen-product.dto';
+import { SeenProductListDto } from 'api/dto/customer/seen-product-list.dto';
 
 export class CreateSeenProductCommand implements ICommand {
-  constructor(public readonly seenProductDto: SeenProductDto) {}
+  constructor(public readonly seenProductListDto: SeenProductListDto) {}
 }

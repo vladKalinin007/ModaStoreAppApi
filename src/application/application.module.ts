@@ -17,6 +17,10 @@ import { RegisterHandler } from './use-cases/identity/authentication/commands/re
 import { GetProductBrandsHandler } from './use-cases/catalog/product-brand/queries/get-product-brands.query/handler/get-product-brands.handler';
 import { GetProductTypesHandler } from './use-cases/catalog/product-type/queries/get-product-types.query/handler/get-product-types.handler';
 import { GetPicturesByTypeHandler } from './use-cases/common/pictures/queries/get-pictures-by-type.query/handler/get-pictures-by-type.handler';
+import { GetSeenProductListHandler } from './use-cases/customer/seen-product/queries/get-seen-product-list.query/handler/get-seen-product-list.handler';
+import { CreateSeenProductHandler } from './use-cases/customer/seen-product/command/create-seen-product.command/handler/create-seen-product.handler';
+import { UpdateSeenProductHandler } from './use-cases/customer/seen-product/command/update-seen-product.command/handler/update-seen-product.handler';
+import { DeleteSeenProductHandler } from './use-cases/customer/seen-product/command/delete-seen-product.command/handler/delete-seen-product.handler';
 
 @Module({
   imports: [CqrsModule, InfrastructureModule],
@@ -37,6 +41,10 @@ import { GetPicturesByTypeHandler } from './use-cases/common/pictures/queries/ge
     GetProductTypesHandler,
     GetPicturesByTypeHandler,
     CreateOrUpdatePaymentIntentHandler,
+    GetSeenProductListHandler,
+    CreateSeenProductHandler,
+    UpdateSeenProductHandler,
+    DeleteSeenProductHandler,
   ],
   exports: [
     CqrsModule,
@@ -57,6 +65,10 @@ import { GetPicturesByTypeHandler } from './use-cases/common/pictures/queries/ge
     GetProductTypesHandler,
     GetPicturesByTypeHandler,
     CreateOrUpdatePaymentIntentHandler,
+    GetSeenProductListHandler,
+    CreateSeenProductHandler,
+    UpdateSeenProductHandler,
+    DeleteSeenProductHandler,
   ],
 })
 export class ApplicationModule {}

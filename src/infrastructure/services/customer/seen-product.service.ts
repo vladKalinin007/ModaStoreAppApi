@@ -2,7 +2,6 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { SeenProductList } from 'domain/models/customer/seen-product-list.model';
-import { SeenProduct } from 'domain/models/customer/seen-product.model';
 
 @Injectable()
 export class SeenProductService {
@@ -29,7 +28,9 @@ export class SeenProductService {
     return this.getSeenProductList(id);
   }
 
-  async updateSeenProducts(seenProduct: SeenProduct): Promise<SeenProductList> {
+  async updateSeenProducts(
+    seenProduct: SeenProductList,
+  ): Promise<SeenProductList> {
     await this.cacheService.set(seenProduct.id, seenProduct, 30 * 24 * 60 * 60);
     return this.getSeenProductList(seenProduct.id);
   }

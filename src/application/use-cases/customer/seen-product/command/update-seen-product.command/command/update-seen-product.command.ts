@@ -1,9 +1,12 @@
 import { ICommand } from '@nestjs/cqrs';
-import { SeenProductDto } from 'api/dto/customer/seen-product.dto';
+import { SeenProductListDto } from 'api/dto/customer/seen-product-list.dto';
 
 export class UpdateSeenProductCommand implements ICommand {
   constructor(
-    public readonly seenProductDto: SeenProductDto,
+    public readonly seenProductListDto: SeenProductListDto,
     public readonly id: string,
-  ) {}
+  ) {
+    this.seenProductListDto = seenProductListDto;
+    this.seenProductListDto.id = id;
+  }
 }
