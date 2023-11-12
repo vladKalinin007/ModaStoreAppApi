@@ -31,15 +31,9 @@ export class BasketController extends BaseController {
     return basket;
   }
 
-  @Post('/basket/:id')
-  @ApiResponse({ status: 200, description: 'Creates the basket' })
-  async createBasket(
-    @Body() basketDto: BasketDto,
-    @Param('id') id: string,
-  ): Promise<BasketDto> {
-    return await this._commandBus.execute(
-      new CreateBasketCommand(new BasketDto(id)),
-    );
+  @Post('/basket')
+  async createBasket(@Body() basketDto: BasketDto): Promise<BasketDto> {
+    return await this._commandBus.execute(new CreateBasketCommand(basketDto));
   }
 
   @Put('/basket/:id')
@@ -52,8 +46,8 @@ export class BasketController extends BaseController {
     );
   }
 
-  @Delete('/basket/:key')
-  async deleteBasket(@Param('key') key: string): Promise<void> {
-    await this._commandBus.execute(new DeleteBasketCommand(key));
+  @Delete('/basket/:id')
+  async deleteBasket(@Param('id') id: string): Promise<void> {
+    await this._commandBus.execute(new DeleteBasketCommand(id));
   }
 }

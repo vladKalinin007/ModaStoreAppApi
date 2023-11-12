@@ -49,10 +49,11 @@ export class PaymentService {
     if (!basket.paymentIntentId) {
       const options = {
         amount:
-          basket.items.reduce((acc, i) => acc + i.quantity * i.price * 100, 0) +
-          shippingPrice * 100,
+          basket.items.reduce((acc, i) => acc + i.quantity * i.price, 0) +
+          shippingPrice,
         currency: 'usd',
         payment_method_types: ['card'],
+        confirm: true,
       };
 
       intent = await stripe.paymentIntents.create(options);

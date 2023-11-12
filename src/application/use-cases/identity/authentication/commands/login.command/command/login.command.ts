@@ -6,7 +6,7 @@ export class LoginCommand implements ICommand {
   readonly password: string;
 
   constructor(public readonly loginDto: LoginDto) {
-    this.email = loginDto.email;
+    this.email = loginDto.username;
     this.password = loginDto.password;
   }
 }

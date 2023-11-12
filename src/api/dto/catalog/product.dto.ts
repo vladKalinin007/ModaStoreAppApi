@@ -351,6 +351,36 @@ export class ProductDto {
     return new ProductDto(product);
   }
 
+  // static toModel(dto: ProductDto): ProductModel {
+  //   return {
+  //     ...dto,
+  //     // productType: dto.productType ? ProductTypeDto.toModel(dto.productType) : undefined,
+  //     // category: dto.category ? CategoryDto.toModel(dto.category) : undefined,
+  //     // productBrand: dto.productBrand ? ProductBrandDto.toModel(dto.productBrand) : undefined,
+  //     // productARelations: dto.productARelations.map((relatedProduct) => {
+  //     //   return RelatedProductDto.toModel(relatedProduct);
+  //     // }),
+  //     // productBRelations: dto.productBRelations.map((relatedProduct) => {
+  //     //   return RelatedProductDto.toModel(relatedProduct);
+  //     // }),
+  //     // productColors: dto.productColors.map((productColor) => {
+  //     //   return ProductColorsDto.toModel(productColor);
+  //     // }),
+  //     // productPictures: dto.productPictures.map((productPicture) => {
+  //     //   return ProductPicturesDto.toModel(productPicture);
+  //     // }),
+  //     // productSizes: dto.productSizes.map((productSize) => {
+  //     //   return ProductSizesDto.toModel(productSize);
+  //     // }),
+  //     // productTags: dto.productTags.map((productTag) => {
+  //     //   return ProductTagsDto.toModel(productTag);
+  //     // }),
+  //     // productReviews: dto.productReviews.map((productReview) => {
+  //     //   return ProductReviewDto.toModel(productReview);
+  //     // }),
+  //   };
+  // }
+
   constructor(product: ProductModel) {
     this.id = product.id;
     this.name = product.name;

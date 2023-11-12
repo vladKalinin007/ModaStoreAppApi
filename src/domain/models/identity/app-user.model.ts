@@ -79,4 +79,44 @@ export class AppUserModel {
 
   @IsOptional()
   addresses: AddressModel[];
+
+  constructor(
+    id: string,
+    displayName: string,
+    userName: string,
+    normalizedUserName: string,
+    email: string,
+    normalizedEmail: string,
+    emailConfirmed: boolean,
+    passwordHash: string,
+    securityStamp: string,
+    concurrencyStamp: string,
+    phoneNumber: string,
+    phoneNumberConfirmed: boolean,
+    twoFactorEnabled: boolean,
+    lockoutEnd: Date,
+    lockoutEnabled: boolean,
+    accessFailedCount: number,
+    productReviews?: ProductReviewModel[],
+    addresses?: AddressModel[],
+  ) {
+    this.id = id;
+    this.displayName = displayName;
+    this.userName = userName;
+    this.normalizedUserName = normalizedUserName;
+    this.email = email;
+    this.normalizedEmail = normalizedEmail;
+    this.emailConfirmed = emailConfirmed;
+    this.passwordHash = passwordHash;
+    this.securityStamp = securityStamp;
+    this.concurrencyStamp = concurrencyStamp;
+    this.phoneNumber = phoneNumber;
+    this.phoneNumberConfirmed = phoneNumberConfirmed;
+    this.twoFactorEnabled = twoFactorEnabled;
+    this.lockoutEnd = lockoutEnd;
+    this.lockoutEnabled = lockoutEnabled;
+    this.accessFailedCount = accessFailedCount;
+    this.productReviews = productReviews;
+    this.addresses = addresses;
+  }
 }

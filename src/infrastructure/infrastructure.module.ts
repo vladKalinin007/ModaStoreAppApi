@@ -7,17 +7,34 @@ import { WishlistService } from './services/customer/wishlist.service';
 import { AuthService } from './services/identity/auth.service';
 import { DeliveryService } from './services/customer/delivery.service';
 import { ProductBrandSerivce } from './services/catalog/product-brand.service';
-import { JwtService } from '@nestjs/jwt';
 import { ProductTypeService } from './services/catalog/product-type.service';
 import { PictureService } from './services/common/picture.service';
 import { PaymentService } from './services/customer/payment.service';
 import { ConfigService } from '@nestjs/config';
 import { SeenProductService } from './services/customer/seen-product.service';
+import { AddressService } from './services/customer/address.service';
+import { ReviewService } from './services/customer/review.service';
+import { UserService } from './services/identity/user.service';
+import { CurrentUserService } from './services/identity/current-user.service';
+import { AsyncLocalStorageService } from './services/storage/als.service';
+import { AsyncLocalStorage } from 'async_hooks';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { SessionSerializer } from './serializers/session.serializer';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { LocalStrategy } from './strategies/local.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { SessionStore } from './services/identity/session.store';
+import { OrderService } from './services/customer/order.service';
 
 @Module({
-  imports: [],
+  imports: [
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '30d' },
+    }),
+    PassportModule.register({ session: true }),
+  ],
   providers: [
-    JwtService,
     ConfigService,
     PrismaService,
     ProductService,
@@ -31,6 +48,19 @@ import { SeenProductService } from './services/customer/seen-product.service';
     PictureService,
     PaymentService,
     SeenProductService,
+    AddressService,
+    ReviewService,
+    UserService,
+    CurrentUserService,
+    AsyncLocalStorageService,
+    AsyncLocalStorage,
+    AuthService,
+    LocalStrategy,
+    SessionSerializer,
+    JwtService,
+    JwtStrategy,
+    SessionStore,
+    OrderService,
   ],
   exports: [
     ProductService,
@@ -45,6 +75,19 @@ import { SeenProductService } from './services/customer/seen-product.service';
     PictureService,
     PaymentService,
     SeenProductService,
+    AddressService,
+    ReviewService,
+    UserService,
+    CurrentUserService,
+    AsyncLocalStorageService,
+    AsyncLocalStorage,
+    AuthService,
+    LocalStrategy,
+    SessionSerializer,
+    JwtService,
+    JwtStrategy,
+    SessionStore,
+    OrderService,
   ],
 })
 export class InfrastructureModule {}

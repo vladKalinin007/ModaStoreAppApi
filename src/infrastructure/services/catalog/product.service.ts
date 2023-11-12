@@ -1,39 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
+import { ProductParams } from 'domain/models/catalog/product-params.model';
+import { createFilter } from 'infrastructure/helpers/filter.helper';
+import { createRelations } from 'infrastructure/helpers/relations.helper';
 
 @Injectable()
 export class ProductService {
   constructor(private readonly _prismaService: PrismaService) {}
 
-  async getAllProducts() {
-    return this._prismaService.product.findMany({
-      include: {
-        productType: true,
-        productBrand: true,
-        category: true,
-        productReviews: true,
-        productARelations: {
-          select: {
-            productB: true,
-            productA: true,
-          },
-        },
-        productPictures: {
-          include: {
-            picture: true,
-          },
-        },
-        productColors: {
-          include: {
-            color: true,
-          },
-        },
-        productSizes: {
-          include: {
-            size: true,
-          },
-        },
-      },
+  async getProducts(params: ProductParams) {
+    const result = await this._prismaService.product.findMany({
+      where: createFilter(params),
+      include: createRelations(),
     });
+
+    return result;
   }
 }

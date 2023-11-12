@@ -8,7 +8,12 @@ export class PictureService {
 
   async getPictureByType(type: string): Promise<PictureModel[]> {
     return (await this._prismaService.picture.findMany({
-      where: { pictureType: type },
+      where: {
+        pictureType: {
+          contains: type,
+          mode: 'insensitive',
+        },
+      },
     })) as unknown as PictureModel[];
   }
 }

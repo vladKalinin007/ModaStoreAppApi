@@ -1,15 +1,13 @@
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from './base.controller';
 import { CommandBus } from '@nestjs/cqrs';
-import { Body, Post } from '@nestjs/common';
+import { Body, Post, Req, UseGuards } from '@nestjs/common';
 
 import { LoginDto, LoginResponseDto } from 'api/dto/identity/login.dto';
 import { LoginCommand } from 'application/use-cases/identity/authentication/commands/login.command/command/login.command';
-import { RegisterCommand } from 'application/use-cases/identity/authentication/commands/register.command/command/register.command';
-import {
-  RegisterDto,
-  RegisterResponseDto,
-} from 'api/dto/identity/register.dto';
+import { LocalAuthGuard } from 'api/guards/local-auth.guard';
+import { AuthenticatedGuard } from 'api/guards/authenticated.guard';
+import { LogoutCommand } from 'application/use-cases/identity/authentication/commands/logout.command/command/logout.command';
 
 @ApiTags('Authentication endpoints')
 export class AuthController extends BaseController {
@@ -17,15 +15,15 @@ export class AuthController extends BaseController {
     super();
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('authentication/login')
   async login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
     return await this._commandBus.execute(new LoginCommand(loginDto));
   }
 
-  @Post('authentication/register')
-  async register(
-    @Body() registerDto: RegisterDto,
-  ): Promise<RegisterResponseDto> {
-    return await this._commandBus.execute(new RegisterCommand(registerDto));
+  @UseGuards(AuthenticatedGuard)
+  @Post('authentication/logout')
+  async logout(@Req() req: any): Promise<void> {
+    return await this._commandBus.execute(new LogoutCommand(req));
   }
 }

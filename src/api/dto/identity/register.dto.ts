@@ -1,18 +1,42 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AppUserModel } from 'domain/models/identity/app-user.model';
+import * as bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 
 export class RegisterDto {
-  @ApiProperty({ example: 'John Doe' })
+  @ApiProperty({ example: 'JohnDoe' })
   displayName: string;
-  @ApiProperty({ example: 'johndoe' })
+
+  @ApiProperty({ example: 'John Doe' })
   userName: string;
-  @ApiProperty({ example: '*12345678' })
+
+  @ApiProperty({ example: 'vladkalinindev@gmail.com' })
   email: string;
-  @ApiProperty({ example: '12345678' })
+
+  @ApiProperty({ example: '123sadf4567#85' })
   password: string;
 
-  toModel(): AppUserModel {
-    return new AppUserModel();
+  static toModel(registerDto: RegisterDto): AppUserModel {
+    return {
+      id: uuidv4(),
+      displayName: registerDto.displayName,
+      userName: registerDto.userName,
+      normalizedUserName: registerDto.userName.toUpperCase(),
+      email: registerDto.email,
+      normalizedEmail: registerDto.email.toUpperCase(),
+      emailConfirmed: false,
+      passwordHash: bcrypt.hashSync(registerDto.password, 10),
+      securityStamp: uuidv4(),
+      concurrencyStamp: uuidv4(),
+      phoneNumber: '0',
+      phoneNumberConfirmed: false,
+      twoFactorEnabled: false,
+      lockoutEnd: new Date(),
+      lockoutEnabled: false,
+      accessFailedCount: 0,
+      productReviews: [],
+      addresses: [],
+    };
   }
 }
 

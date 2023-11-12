@@ -7,6 +7,7 @@ import {
   IsDate,
 } from 'class-validator';
 import { AppUserDto, ProductDto } from '..';
+import { ProductReviewModel } from 'domain/models/catalog/product-review.model';
 
 export class ProductReviewDto {
   @ApiProperty({ required: true })
@@ -46,4 +47,21 @@ export class ProductReviewDto {
   @ApiProperty({ required: false, type: () => ProductDto })
   @IsOptional()
   product?: ProductDto;
+
+  // В ProductReviewDto
+  static toModel(dto: ProductReviewDto): ProductReviewModel {
+    return {
+      ...dto,
+      user: dto.user ? AppUserDto.toModel(dto.user) : undefined,
+      product: null,
+    };
+  }
+
+  static fromModel(model: ProductReviewModel): ProductReviewDto {
+    return {
+      ...model,
+      user: model.user ? AppUserDto.fromModel(model.user) : undefined,
+      product: model.product ? ProductDto.fromModel(model.product) : undefined,
+    };
+  }
 }

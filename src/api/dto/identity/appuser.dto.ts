@@ -8,6 +8,7 @@ import {
   IsNumber,
 } from 'class-validator';
 import { ProductReviewDto, AddressDto } from '..';
+import { AppUserModel } from 'domain/models/identity/app-user.model';
 
 export class AppUserDto {
   @ApiProperty({ required: true })
@@ -97,4 +98,20 @@ export class AppUserDto {
   @ApiProperty({ required: true, type: () => AddressDto })
   @IsOptional()
   addresses: AddressDto[];
+
+  static toModel(dto: AppUserDto): AppUserModel {
+    return {
+      ...dto,
+      productReviews: [],
+      addresses: [],
+    };
+  }
+
+  static fromModel(model: AppUserModel): AppUserDto {
+    return {
+      ...model,
+      productReviews: [],
+      addresses: [],
+    };
+  }
 }

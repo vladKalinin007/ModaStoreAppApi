@@ -1,81 +1,108 @@
-// import { Injectable } from '@nestjs/common';
-// import { BasketService } from './basket.service';
-// import { DeliveryService } from './delivery.service';
-// import { PaymentService } from './payment.service';
-// import { AddressModel } from 'domain/models/customer/address.model';
-// import { OrderItemModel } from 'domain/models/customer/order-item.model';
-// import { PrismaService } from 'infrastructure/database/prisma.service';
-// import { OrderModel } from 'domain/models/customer/order.model';
+import { Injectable } from '@nestjs/common';
+import { BasketService } from './basket.service';
+import { PaymentService } from './payment.service';
+import { PrismaService } from 'infrastructure/database/prisma.service';
+import { OrderModel } from 'domain/models/customer/order.model';
+import { OrderItemModel } from 'domain/models/customer/order-item.model';
+import { UserService } from '../identity/user.service';
+import { v4 as uuid } from 'uuid';
+import { OrderStatus } from 'domain/enums/customer/order-status.enum';
+import { AddressService } from './address.service';
 
-// @Injectable()
-// export class OrderService {
-//   constructor(
-//     private readonly _basketService: BasketService,
-//     private readonly _deliveryService: DeliveryService,
-//     private readonly _paymentService: PaymentService,
-//     private readonly _prismaService: PrismaService,
-//   ) {}
+@Injectable()
+export class OrderService {
+  constructor(
+    private readonly _basketService: BasketService,
+    private readonly _paymentService: PaymentService,
+    private readonly _prismaService: PrismaService,
+    private readonly _userService: UserService,
+    private readonly _addressService: AddressService,
+  ) {}
 
-//   async getOrders() {
-//     return this._prismaService.order.findMany();
-//   }
+  async getOrders() {
+    return this._prismaService.order.findMany({
+      include: {
+        orderItems: true,
+        deliveryMethod: true,
+      },
+    });
+  }
 
-//   async getOrderById(id: string) {
-//     return this._prismaService.order.findUnique({
-//       where: {
-//         id,
-//       },
-//     });
-//   }
+  async getOrderById(id: string) {
+    return this._prismaService.order.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        orderItems: true,
+        deliveryMethod: true,
+      },
+    });
+  }
 
-//   async createOrder(
-//     buyerEmail: string,
-//     basketId: string,
-//     deliveryMethodId: number,
-//     shipToAddress: AddressModel,
-//   ) {
-//     const basket = await this._basketService.getBasket(basketId);
+  async createOrder(basketId: string) {
+    const basket = await this._basketService.getBasket(basketId);
 
-//     const items = new Array<OrderItemModel>();
+    const items: OrderItemModel[] = basket.items.map((item) => {
+      return new OrderItemModel(
+        item.id,
+        item.productName,
+        item.pictureUrl,
+        item.price,
+        item.quantity,
+      );
+    });
 
-//     for (const item of basket.items) {
-//       const productItem = await this._basketService.getProduct(item.productId);
+    const buyerEmail: string = (await this._userService.getCurrentUser()).email;
 
-//       const itemOrdered = new OrderItem(
-//         productItem.id,
-//         productItem.name,
-//         productItem.pictureUrl,
-//         item.price,
-//         item.quantity,
-//       );
+    const deliveryMethodId: string = basket.deliveryMethodId;
 
-//       items.push(itemOrdered);
-//     }
+    const shipToAddressId: string = (
+      await this._addressService.getUserAddress()
+    ).id;
 
-//     const deliveryMethod =
-//       await this._deliveryService.getDeliveryMethods(deliveryMethodId);
+    const paymentIntentId: string = (
+      await this._paymentService.createOrUpdatePaymentIntent(basketId)
+    ).paymentIntentId;
 
-//     const subtotal = items.reduce((item) => item.price * item.quantity);
+    const subtotal: number = items.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
 
-//     return order;
-//   }
+    return (await this._prismaService.order.create({
+      data: {
+        id: uuid(),
+        buyerEmail: buyerEmail,
+        orderDate: new Date(),
+        subtotal: subtotal,
+        status: OrderStatus.Pending,
+        paymentIntentId: paymentIntentId,
+        shipToAddressId: shipToAddressId,
+        deliveryMethodId: deliveryMethodId,
+        orderItems: {
+          create: items,
+        },
+      },
+    })) as OrderModel;
+  }
 
-//   async updateOrder(order: OrderModel) {
-//     return this._prismaService.order.update({
-//       where: {
-//         id: order.id,
-//       },
-//       data: {
-//         status: order.status,
-//       },
-//     });
-//   }
+  async updateOrder(order: OrderModel) {
+    return this._prismaService.order.update({
+      where: {
+        id: order.id,
+      },
+      data: {
+        status: order.status,
+      },
+    });
+  }
 
-//   async deleteOrder(id: string) {
-//     return this._prismaService.order.delete({
-//       where: {
-//         id,
-//       },
-//     });
-//   }
-// }
+  async deleteOrder(id: string) {
+    return this._prismaService.order.delete({
+      where: {
+        id,
+      },
+    });
+  }
+}

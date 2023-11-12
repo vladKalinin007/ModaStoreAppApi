@@ -1,41 +1,55 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Basket } from '../../../domain/models/customer/basket.model';
 import { BasketItemDto } from './basket-item.dto';
 
 export class BasketDto {
+  @ApiProperty({
+    default: 'bd1f43a6-a013-4ff9-81a7-477130fa679b',
+    type: String,
+  })
   id?: string | null = null;
+
+  @ApiProperty({ required: true, type: [BasketItemDto] })
   items: BasketItemDto[] = [];
+
+  @ApiProperty({
+    default: 'e9712d1a-7e62-11ee-b962-0242ac120002',
+    type: String,
+  })
   deliveryMethodId?: string | null = null;
+
+  @ApiProperty({ default: null, type: String })
   clientSecret?: string | null = null;
+
+  @ApiProperty({ default: null, type: String })
   paymentIntentId?: string | null = null;
+
+  @ApiProperty({ default: 50, type: Number })
   shippingPrice?: number | null = null;
 
   constructor(id?: string) {
     this.id = id;
   }
 
-  toModel(id?: string): Basket {
-    const basket = new Basket();
-    basket.id = id || this.id;
-    basket.items = this.items.map((item) => item.toModel());
-    basket.deliveryMethodId = this.deliveryMethodId;
-    basket.clientSecret = this.clientSecret;
-    basket.paymentIntentId = this.paymentIntentId;
-    basket.shippingPrice = this.shippingPrice;
-    return basket;
+  static toModel(basketDto: BasketDto): Basket {
+    return {
+      id: basketDto.id || null,
+      items: basketDto.items.map((item) => BasketItemDto.toModel(item)),
+      deliveryMethodId: basketDto.deliveryMethodId || null,
+      clientSecret: basketDto.clientSecret || null,
+      paymentIntentId: basketDto.paymentIntentId || null,
+      shippingPrice: basketDto.shippingPrice || null,
+    };
   }
 
   static fromModel(basket: Basket): BasketDto {
-    const basketDto = new BasketDto();
-    if (basket !== null) {
-      basketDto.id = basket.id;
-      basketDto.items = basket.items.map((item) =>
-        BasketItemDto.fromModel(item),
-      );
-      basketDto.deliveryMethodId = basket.deliveryMethodId;
-      basketDto.clientSecret = basket.clientSecret;
-      basketDto.paymentIntentId = basket.paymentIntentId;
-      basketDto.shippingPrice = basket.shippingPrice;
-    }
-    return basketDto;
+    return {
+      id: basket.id || null,
+      items: basket.items.map((item) => BasketItemDto.fromModel(item)),
+      deliveryMethodId: basket.deliveryMethodId || null,
+      clientSecret: basket.clientSecret || null,
+      paymentIntentId: basket.paymentIntentId || null,
+      shippingPrice: basket.shippingPrice || null,
+    };
   }
 }

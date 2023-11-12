@@ -10,10 +10,8 @@ export class UpdateBasketHandler
   constructor(private readonly _basketService: BasketService) {}
 
   async execute(command: UpdateBasketCommand): Promise<BasketDto> {
-    return BasketDto.fromModel(
-      await this._basketService.updateBasket(
-        command.basketDto.toModel(command.id),
-      ),
-    );
+    const basket = BasketDto.toModel(command.basketDto);
+    const updatedBasket = await this._basketService.updateBasket(basket);
+    return BasketDto.fromModel(updatedBasket);
   }
 }

@@ -10,9 +10,10 @@ export class GetProductsQueryHandler
 {
   constructor(private readonly _productService: ProductService) {}
 
-  async execute(): Promise<ProductDto[]> {
-    const products =
-      (await this._productService.getAllProducts()) as unknown as ProductModel[];
+  async execute(query: GetProductsQuery): Promise<ProductDto[]> {
+    const products = (await this._productService.getProducts(
+      query.params,
+    )) as ProductModel[];
 
     return products.map((product) => ProductDto.fromModel(product));
   }

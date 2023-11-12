@@ -16,10 +16,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
       exception instanceof HttpException ? exception.getStatus() : 500;
 
     const errorResponse = {
-      statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
-      message: exception['response'] || exception['message'] || null,
+      method: request.method,
+      info: exception['response'] || exception['message'] || null,
     };
 
     response.status(status).json(errorResponse);
