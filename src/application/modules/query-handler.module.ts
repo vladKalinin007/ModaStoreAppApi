@@ -9,6 +9,7 @@ import { GetBasketByIdHandler } from 'application/use-cases/customer/basket/quer
 import { GetSeenProductListHandler } from 'application/use-cases/customer/seen-product/queries/get-seen-product-list.query/handler/get-seen-product-list.handler';
 import { GetWishlistByIdHandler } from 'application/use-cases/customer/wishlist/queries/get-wishlist-by-id.query/handler/get-wishlist-by-id.handler';
 import { CheckEmailExistsHandler } from 'application/use-cases/identity/user/queries/check-email-exists.query/handler/check-email-exists.handler';
+import { GetLatestReviewsHandler } from 'application/use-cases/identity/user/queries/get-latest-reviews.query/handler/get-latest-reviews.handler';
 import { GetUserHandler } from 'application/use-cases/identity/user/queries/get-user.query/handler/get-user.handler';
 import { InfrastructureModule } from 'infrastructure/infrastructure.module';
 
@@ -25,6 +26,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     GetSeenProductListHandler,
     CheckEmailExistsHandler,
     GetUserHandler,
+    GetLatestReviewsHandler,
   ],
   exports: [
     GetProductsQueryHandler,
@@ -37,6 +39,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     GetSeenProductListHandler,
     CheckEmailExistsHandler,
     GetUserHandler,
+    GetLatestReviewsHandler,
   ],
 })
 export class QueryHandlerModule {}

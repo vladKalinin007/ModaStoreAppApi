@@ -4,6 +4,8 @@ import {
   IsNumber,
   IsOptional,
   IsDate,
+  Min,
+  Max,
 } from 'class-validator';
 import { AppUserModel } from '../identity/app-user.model';
 import { ProductModel } from './product.model';
@@ -15,6 +17,8 @@ export class ProductReviewModel {
 
   @IsNotEmpty()
   @IsNumber()
+  @Min(1)
+  @Max(5)
   rating: number;
 
   @IsNotEmpty()

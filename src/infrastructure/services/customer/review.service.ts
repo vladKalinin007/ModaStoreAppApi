@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ProductReviewModel } from 'domain/models/catalog/product-review.model';
 import { PrismaService } from 'infrastructure/database/prisma.service';
 import { CurrentUserService } from '../identity/current-user.service';
+import { CreateReviewRelations } from 'infrastructure/helpers/review-relations.helper';
 
 @Injectable()
 export class ReviewService {
@@ -26,10 +27,11 @@ export class ReviewService {
     });
   }
 
-  async getLatestReviews() {
+  async getLatestReviews(): Promise<ProductReviewModel[]> {
     return (await this._prismaService.productReview.findMany({
       orderBy: { createdOnUtc: 'desc' },
       take: 3,
+      include: CreateReviewRelations(),
     })) as ProductReviewModel[];
   }
 

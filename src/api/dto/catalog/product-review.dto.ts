@@ -35,6 +35,11 @@ export class ProductReviewDto {
   @IsString()
   productId?: string;
 
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  pictureUrl?: string;
+
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsDate()
@@ -44,9 +49,17 @@ export class ProductReviewDto {
   @IsOptional()
   user?: AppUserDto;
 
+  @ApiProperty({ required: false })
+  @IsOptional()
+  userName?: string;
+
   @ApiProperty({ required: false, type: () => ProductDto })
   @IsOptional()
   product?: ProductDto;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  productName?: string;
 
   // В ProductReviewDto
   static toModel(dto: ProductReviewDto): ProductReviewModel {
@@ -59,9 +72,13 @@ export class ProductReviewDto {
 
   static fromModel(model: ProductReviewModel): ProductReviewDto {
     return {
-      ...model,
-      user: model.user ? AppUserDto.fromModel(model.user) : undefined,
-      product: model.product ? ProductDto.fromModel(model.product) : undefined,
+      id: model.id,
+      rating: model.rating,
+      comment: model.comment,
+      pictureUrl: model.product.productPictures?.map((x) => x.picture.url)[0],
+      userName: model.user?.displayName,
+      productName: model.product?.name,
+      createdOnUtc: model.createdOnUtc,
     };
   }
 }

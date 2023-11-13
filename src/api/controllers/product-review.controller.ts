@@ -24,7 +24,7 @@ export class ProductReviewController extends BaseController {
   }
 
   @Get('reviews/latest')
-  async getLatestReviews() {
+  async getLatestReviews(): Promise<ProductReviewDto[]> {
     return await this._queryBus.execute(new GetLatestReviewsQuery());
   }
 
