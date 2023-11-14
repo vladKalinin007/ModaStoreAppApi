@@ -51,7 +51,7 @@ export class ProductDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  oldPrice?: Prisma.Decimal;
+  oldPrice?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
@@ -387,7 +387,7 @@ export class ProductDto {
     this.description = product.description;
     this.shortDescription = product.shortDescription;
     this.price = product.price;
-    this.oldPrice = product.oldPrice;
+    this.oldPrice = product.oldPrice.toNumber();
     this.specialPrice = product.specialPrice;
     this.discountPercentage = product.discountPercentage;
     this.pictureUrl = product.pictureUrl;
@@ -404,6 +404,9 @@ export class ProductDto {
     this.productType = product.productType?.name;
     this.productBrand = product.productBrand?.name;
     this.category = product.category?.name;
+    this.isBestSeller = product.isBestSeller;
+    this.isNew = product.isNew;
+    this.isOnSale = product.isOnSale;
 
     this.pictures = product.productPictures.map((productPicture) => {
       return productPicture.picture.url;
