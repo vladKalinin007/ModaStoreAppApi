@@ -13,6 +13,7 @@ import { UpdateWishlistHandler } from 'application/use-cases/customer/wishlist/c
 import { LoginHandler } from 'application/use-cases/identity/authentication/commands/login.command/handler/login.handler';
 import { LogoutHandler } from 'application/use-cases/identity/authentication/commands/logout.command/handler/logout.handler';
 import { RegisterHandler } from 'application/use-cases/identity/authentication/commands/register.command/handler/register.handler';
+import { UpdateAddressHandler } from 'application/use-cases/identity/user/commands/update-address.command/handler/update-address.handler';
 import { InfrastructureModule } from 'infrastructure/infrastructure.module';
 
 @Module({
@@ -32,6 +33,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     UpdateSeenProductHandler,
     DeleteSeenProductHandler,
     CreateOrderHandler,
+    UpdateAddressHandler,
   ],
   exports: [
     CreateBasketHandler,
@@ -48,6 +50,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     UpdateSeenProductHandler,
     DeleteSeenProductHandler,
     CreateOrderHandler,
+    UpdateAddressHandler,
   ],
 })
 export class CommandHandlerModule {}

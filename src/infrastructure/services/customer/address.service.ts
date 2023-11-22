@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AddressModel } from 'domain/models/customer/address.model';
 import { PrismaService } from 'infrastructure/database/prisma.service';
 import { CurrentUserService } from '../identity/current-user.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AddressService {
@@ -12,12 +13,31 @@ export class AddressService {
 
   async getUserAddress() {
     const id: string = await this._currentUser.get();
-    return (await this._prismaService.address.findFirst({
+    const address = (await this._prismaService.address.findFirst({
       where: { appUserId: id },
     })) as AddressModel;
+
+    if (address) {
+      return address;
+    } else {
+      const newAddress = {
+        id: uuidv4(),
+        firstName: '',
+        lastName: '',
+        street: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        appUserId: id,
+      } as AddressModel;
+
+      this.createAddress(newAddress);
+
+      return this.getUserAddress();
+    }
   }
 
-  async createAddress(address: AddressModel) {
+  async createAddress(address?: AddressModel) {
     return await this._prismaService.address.create({
       data: {
         id: address.id,
@@ -33,10 +53,18 @@ export class AddressService {
   }
 
   async updateAddress(address: AddressModel) {
-    return await this._prismaService.address.update({
-      where: { id: address.id },
+    const id: string = await this._currentUser.get();
+    const addressToFind = await this._prismaService.address.findFirst({
+      where: { appUserId: id },
+    });
+
+    if (!addressToFind) {
+      throw new Error('Address not found');
+    }
+
+    return (await this._prismaService.address.update({
+      where: { id: addressToFind.id },
       data: {
-        id: address.id,
         firstName: address.firstName,
         lastName: address.lastName,
         street: address.street,
@@ -44,7 +72,7 @@ export class AddressService {
         state: address.state,
         zipcode: address.zipcode,
       },
-    });
+    })) as AddressModel;
   }
 
   async deleteAddress(id: string) {
