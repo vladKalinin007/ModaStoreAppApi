@@ -30,13 +30,10 @@ export class WishlistController extends BaseController {
     return wishlist;
   }
 
-  @Post('/wishlist/:id')
-  async createWishlist(
-    @Body() wishlistDto: WishlistDto,
-    @Param('id') id: string,
-  ): Promise<WishlistDto> {
+  @Post('/wishlist')
+  async createWishlist(@Body() wishlistDto: WishlistDto): Promise<WishlistDto> {
     return await this._commandBus.execute(
-      new CreateWishlistCommand(new WishlistDto(id, wishlistDto)),
+      new CreateWishlistCommand(wishlistDto),
     );
   }
 

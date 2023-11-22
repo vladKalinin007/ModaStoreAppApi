@@ -9,27 +9,27 @@ export class WishlistItemDto {
   ProductType: string;
   ProductBrand: string;
 
-  toModel(): WishlistItem {
-    const wishlistItem = new WishlistItem();
-    wishlistItem.id = this.id;
-    wishlistItem.name = this.name;
-    wishlistItem.description = this.description;
-    wishlistItem.pictureUrl = this.pictureUrl;
-    wishlistItem.price = this.price;
-    wishlistItem.ProductType = this.ProductType;
-    wishlistItem.ProductBrand = this.ProductBrand;
-    return wishlistItem;
+  static toModel(wishlistItemDto: WishlistItemDto): WishlistItem {
+    return {
+      id: wishlistItemDto.id,
+      name: wishlistItemDto.name,
+      description: wishlistItemDto.description,
+      pictureUrl: wishlistItemDto.pictureUrl,
+      price: wishlistItemDto.price,
+      ProductType: wishlistItemDto.ProductType,
+      ProductBrand: wishlistItemDto.ProductBrand,
+    } as WishlistItem;
   }
 
   static fromModel(wishlistItem: WishlistItem): WishlistItemDto {
-    const wishlistItemDto = new WishlistItemDto();
-    wishlistItemDto.id = wishlistItem.id;
-    wishlistItemDto.name = wishlistItem.name;
-    wishlistItemDto.description = wishlistItem.description;
-    wishlistItemDto.pictureUrl = wishlistItem.pictureUrl;
-    wishlistItemDto.price = wishlistItem.price;
-    wishlistItemDto.ProductType = wishlistItem.ProductType;
-    wishlistItemDto.ProductBrand = wishlistItem.ProductBrand;
-    return wishlistItemDto;
+    return {
+      id: wishlistItem.id,
+      name: wishlistItem.name,
+      description: wishlistItem.description,
+      pictureUrl: wishlistItem.pictureUrl,
+      price: wishlistItem.price,
+      ProductType: wishlistItem.ProductType,
+      ProductBrand: wishlistItem.ProductBrand,
+    } as WishlistItemDto;
   }
 }

@@ -10,21 +10,21 @@ export class WishlistDto {
     this.wishlistItems = wishlist?.wishlistItems || [];
   }
 
-  toModel(id?: string): Wishlist {
-    const wishlist = new Wishlist();
-    wishlist.id = id || this.id;
-    wishlist.wishlistItems = this.wishlistItems.map((item) => item.toModel());
-    return wishlist;
+  static toModel(wishlistDto: WishlistDto): Wishlist {
+    return {
+      id: wishlistDto.id,
+      wishlistItems: wishlistDto.wishlistItems.map((item) =>
+        WishlistItemDto.toModel(item),
+      ),
+    } as Wishlist;
   }
 
   static fromModel(wishlist: Wishlist): WishlistDto {
-    const wishlistDto = new WishlistDto();
-    if (wishlist !== null) {
-      wishlistDto.id = wishlist.id;
-      wishlistDto.wishlistItems = wishlist.wishlistItems.map((item) =>
+    return {
+      id: wishlist.id,
+      wishlistItems: wishlist.wishlistItems.map((item) =>
         WishlistItemDto.fromModel(item),
-      );
-    }
-    return wishlistDto;
+      ),
+    } as WishlistDto;
   }
 }

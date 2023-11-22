@@ -10,10 +10,8 @@ export class CreateWishlistHandler
   constructor(private readonly _wishlistService: WishlistService) {}
 
   async execute(command: CreateWishlistCommand): Promise<WishlistDto> {
-    return WishlistDto.fromModel(
-      await this._wishlistService.createWishlist(
-        command.wishlistDto.toModel(command.wishlistDto.id),
-      ),
-    );
+    const wishlist = WishlistDto.toModel(command.wishlistDto);
+    const result = await this._wishlistService.createWishlist(wishlist);
+    return WishlistDto.fromModel(result);
   }
 }
