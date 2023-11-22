@@ -13,6 +13,9 @@ export class RegisterDto {
   @ApiProperty({ example: 'vladkalinindev@gmail.com' })
   email: string;
 
+  @ApiProperty({ example: '89099999236' })
+  phone: string;
+
   @ApiProperty({ example: '123sadf4567#85' })
   password: string;
 
@@ -28,7 +31,7 @@ export class RegisterDto {
       passwordHash: bcrypt.hashSync(registerDto.password, 10),
       securityStamp: uuidv4(),
       concurrencyStamp: uuidv4(),
-      phoneNumber: '0',
+      phoneNumber: registerDto.phone || '0',
       phoneNumberConfirmed: false,
       twoFactorEnabled: false,
       lockoutEnd: new Date(),

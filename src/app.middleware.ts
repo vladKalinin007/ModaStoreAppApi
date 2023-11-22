@@ -24,7 +24,10 @@ export function middleware(app: INestApplication): INestApplication {
   // app.use(passport.initialize());
   // app.use(passport.session());
 
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
 
   return app;
 }
