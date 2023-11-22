@@ -24,6 +24,7 @@ export class AppUserModel {
 
   @IsOptional()
   @IsString()
+  @IsOptional()
   normalizedUserName?: string;
 
   @IsNotEmpty()
@@ -32,22 +33,27 @@ export class AppUserModel {
 
   @IsNotEmpty()
   @IsString()
+  @IsOptional()
   normalizedEmail: string;
 
   @IsNotEmpty()
   @IsBoolean()
+  @IsOptional()
   emailConfirmed: boolean;
 
   @IsNotEmpty()
   @IsString()
+  @IsOptional()
   passwordHash: string;
 
   @IsNotEmpty()
   @IsString()
+  @IsOptional()
   securityStamp: string;
 
   @IsNotEmpty()
   @IsString()
+  @IsOptional()
   concurrencyStamp: string;
 
   @IsOptional()
@@ -56,22 +62,27 @@ export class AppUserModel {
 
   @IsNotEmpty()
   @IsBoolean()
+  @IsOptional()
   phoneNumberConfirmed: boolean;
 
   @IsNotEmpty()
   @IsBoolean()
+  @IsOptional()
   twoFactorEnabled: boolean;
 
   @IsOptional()
   @IsDate()
+  @IsOptional()
   lockoutEnd?: Date;
 
   @IsNotEmpty()
   @IsBoolean()
+  @IsOptional()
   lockoutEnabled: boolean;
 
   @IsNotEmpty()
   @IsNumber()
+  @IsOptional()
   accessFailedCount: number;
 
   @IsOptional()

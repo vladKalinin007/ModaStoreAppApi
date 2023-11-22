@@ -1,13 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsString,
-  IsNotEmpty,
-  IsOptional,
-  IsBoolean,
-  IsDate,
-  IsNumber,
-} from 'class-validator';
-import { ProductReviewDto, AddressDto } from '..';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 import { AppUserModel } from 'domain/models/identity/app-user.model';
 
 export class AppUserDto {
@@ -29,89 +21,28 @@ export class AppUserDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  normalizedUserName?: string;
+  phone: string;
 
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
   email: string;
 
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsString()
-  normalizedEmail: string;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsBoolean()
-  emailConfirmed: boolean;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsString()
-  passwordHash: string;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsString()
-  securityStamp: string;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsString()
-  concurrencyStamp: string;
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsString()
-  phoneNumber?: string;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsBoolean()
-  phoneNumberConfirmed: boolean;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsBoolean()
-  twoFactorEnabled: boolean;
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsDate()
-  lockoutEnd?: Date;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsBoolean()
-  lockoutEnabled: boolean;
-
-  @ApiProperty({ required: true })
-  @IsNotEmpty()
-  @IsNumber()
-  accessFailedCount: number;
-
-  @ApiProperty({ required: true, type: () => ProductReviewDto })
-  @IsOptional()
-  productReviews: ProductReviewDto[];
-
-  @ApiProperty({ required: true, type: () => AddressDto })
-  @IsOptional()
-  addresses: AddressDto[];
-
-  static toModel(dto: AppUserDto): AppUserModel {
+  static toDto(model: AppUserModel): AppUserDto {
     return {
-      ...dto,
-      productReviews: [],
-      addresses: [],
+      id: model.id,
+      displayName: model.displayName,
+      userName: model.userName,
+      phone: model.phoneNumber,
+      email: model.email,
     };
   }
 
-  static fromModel(model: AppUserModel): AppUserDto {
+  static toModel(user: AppUserDto): AppUserModel {
     return {
-      ...model,
-      productReviews: [],
-      addresses: [],
-    };
+      displayName: user.displayName,
+      phoneNumber: user.phone,
+      email: user.email,
+    } as AppUserModel;
   }
 }

@@ -59,19 +59,8 @@ export class UserService {
       where: { id: id },
       data: {
         displayName: user.displayName,
-        userName: user.userName,
         email: user.email,
-        emailConfirmed: user.emailConfirmed,
-        normalizedEmail: user.normalizedEmail,
-        passwordHash: user.passwordHash,
-        securityStamp: user.securityStamp,
         phoneNumber: user.phoneNumber,
-        phoneNumberConfirmed: user.phoneNumberConfirmed,
-        twoFactorEnabled: user.twoFactorEnabled,
-        lockoutEnd: user.lockoutEnd,
-        lockoutEnabled: user.lockoutEnabled,
-        accessFailedCount: user.accessFailedCount,
-        concurrencyStamp: user.concurrencyStamp,
       },
     })) as AppUserModel;
   }

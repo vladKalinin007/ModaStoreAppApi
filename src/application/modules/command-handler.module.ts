@@ -14,6 +14,7 @@ import { LoginHandler } from 'application/use-cases/identity/authentication/comm
 import { LogoutHandler } from 'application/use-cases/identity/authentication/commands/logout.command/handler/logout.handler';
 import { RegisterHandler } from 'application/use-cases/identity/authentication/commands/register.command/handler/register.handler';
 import { UpdateAddressHandler } from 'application/use-cases/identity/user/commands/update-address.command/handler/update-address.handler';
+import { UpdateUserHandler } from 'application/use-cases/identity/user/commands/update-user.command/handler/update-user.handler';
 import { InfrastructureModule } from 'infrastructure/infrastructure.module';
 
 @Module({
@@ -34,6 +35,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     DeleteSeenProductHandler,
     CreateOrderHandler,
     UpdateAddressHandler,
+    UpdateUserHandler,
   ],
   exports: [
     CreateBasketHandler,
@@ -51,6 +53,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     DeleteSeenProductHandler,
     CreateOrderHandler,
     UpdateAddressHandler,
+    UpdateUserHandler,
   ],
 })
 export class CommandHandlerModule {}

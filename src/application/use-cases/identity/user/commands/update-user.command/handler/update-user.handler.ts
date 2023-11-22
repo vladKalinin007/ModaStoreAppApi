@@ -7,9 +7,9 @@ import { UserService } from 'infrastructure/services/identity/user.service';
 export class UpdateUserHandler implements ICommandHandler<UpdateUserCommand> {
   constructor(private readonly _userService: UserService) {}
 
-  async execute(command: UpdateUserCommand) {
-    const updateUser = AppUserDto.toModel(command.userDto);
-
-    return await this._userService.updateUser(updateUser);
+  async execute(command: UpdateUserCommand): Promise<AppUserDto> {
+    const updatingUser = AppUserDto.toModel(command.userDto);
+    const updatedUser = await this._userService.updateUser(updatingUser);
+    return AppUserDto.toDto(updatedUser);
   }
 }
