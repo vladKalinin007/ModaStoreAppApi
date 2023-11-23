@@ -7,4 +7,7 @@ export class BasketItem extends BaseEntity {
   pictureUrl: string;
   brand: string;
   type: string;
+  isBestSeller: boolean;
+  isNew: boolean;
+  oldPrice: number;
 }

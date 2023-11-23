@@ -26,6 +26,15 @@ export class BasketItemDto {
   @ApiProperty({ default: 'Test type', type: String })
   type: string;
 
+  @ApiProperty({ default: false, type: Boolean })
+  isNew: boolean;
+
+  @ApiProperty({ default: false, type: Boolean })
+  isBestSeller: boolean;
+
+  @ApiProperty({ default: 0, type: Number })
+  oldPrice: number;
+
   static toModel(basketItemDto: BasketItemDto): BasketItem {
     return {
       id: basketItemDto.id,
@@ -35,6 +44,9 @@ export class BasketItemDto {
       pictureUrl: basketItemDto.pictureUrl,
       brand: basketItemDto.brand,
       type: basketItemDto.type,
+      isBestSeller: basketItemDto.isBestSeller,
+      isNew: basketItemDto.isNew,
+      oldPrice: basketItemDto.oldPrice,
     };
   }
 
@@ -47,6 +59,9 @@ export class BasketItemDto {
       pictureUrl: basketItem.pictureUrl,
       brand: basketItem.brand,
       type: basketItem.type,
+      isBestSeller: basketItem.isBestSeller,
+      isNew: basketItem.isNew,
+      oldPrice: basketItem.oldPrice,
     };
   }
 }
