@@ -11,6 +11,7 @@ import { GetWishlistByIdHandler } from 'application/use-cases/customer/wishlist/
 import { CheckEmailExistsHandler } from 'application/use-cases/identity/user/queries/check-email-exists.query/handler/check-email-exists.handler';
 import { GetAddressHandler } from 'application/use-cases/identity/user/queries/get-address.query/handler/get-address.handler';
 import { GetLatestReviewsHandler } from 'application/use-cases/identity/user/queries/get-latest-reviews.query/handler/get-latest-reviews.handler';
+import { GetProductReviewsHandler } from 'application/use-cases/identity/user/queries/get-product-reviews.query/handler/get-proudct-reviews.handler';
 import { GetUserHandler } from 'application/use-cases/identity/user/queries/get-user.query/handler/get-user.handler';
 import { InfrastructureModule } from 'infrastructure/infrastructure.module';
 
@@ -29,6 +30,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     GetUserHandler,
     GetLatestReviewsHandler,
     GetAddressHandler,
+    GetProductReviewsHandler,
   ],
   exports: [
     GetProductsQueryHandler,
@@ -43,6 +45,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     GetUserHandler,
     GetLatestReviewsHandler,
     GetAddressHandler,
+    GetProductReviewsHandler,
   ],
 })
 export class QueryHandlerModule {}

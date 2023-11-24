@@ -13,6 +13,7 @@ import { UpdateWishlistHandler } from 'application/use-cases/customer/wishlist/c
 import { LoginHandler } from 'application/use-cases/identity/authentication/commands/login.command/handler/login.handler';
 import { LogoutHandler } from 'application/use-cases/identity/authentication/commands/logout.command/handler/logout.handler';
 import { RegisterHandler } from 'application/use-cases/identity/authentication/commands/register.command/handler/register.handler';
+import { AddReviewHandler } from 'application/use-cases/identity/user/commands/add-review.command/handler/add-review.handler';
 import { UpdateAddressHandler } from 'application/use-cases/identity/user/commands/update-address.command/handler/update-address.handler';
 import { UpdateUserHandler } from 'application/use-cases/identity/user/commands/update-user.command/handler/update-user.handler';
 import { InfrastructureModule } from 'infrastructure/infrastructure.module';
@@ -36,6 +37,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     CreateOrderHandler,
     UpdateAddressHandler,
     UpdateUserHandler,
+    AddReviewHandler,
   ],
   exports: [
     CreateBasketHandler,
@@ -54,6 +56,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     CreateOrderHandler,
     UpdateAddressHandler,
     UpdateUserHandler,
+    AddReviewHandler,
   ],
 })
 export class CommandHandlerModule {}

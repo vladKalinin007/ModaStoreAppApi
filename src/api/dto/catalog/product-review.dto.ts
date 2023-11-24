@@ -61,7 +61,6 @@ export class ProductReviewDto {
   @IsOptional()
   productName?: string;
 
-  // В ProductReviewDto
   static toModel(dto: ProductReviewDto): ProductReviewModel {
     return {
       ...dto,
@@ -80,5 +79,48 @@ export class ProductReviewDto {
       productName: model.product?.name,
       createdOnUtc: model.createdOnUtc,
     };
+  }
+}
+
+export class ReviewToPublishDto {
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  @IsNumber()
+  rating: number;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  @IsString()
+  comment: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  userId?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  productId?: string;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  @IsDate()
+  createdOnUtc: Date;
+
+  static toModel(dto: ReviewToPublishDto) {
+    return {
+      id: dto.id,
+      rating: dto.rating,
+      comment: dto.comment,
+      userId: dto.userId,
+      productId: dto.productId,
+      createdOnUtc: dto.createdOnUtc,
+    } as ProductReviewModel;
   }
 }

@@ -21,10 +21,22 @@ export class ReviewService {
     });
   }
 
-  async getReviewsByProductId(productId: string) {
-    return await this._prismaService.productReview.findMany({
+  async getReviewsByProductId(
+    productId: string,
+  ): Promise<ProductReviewModel[]> {
+    return (await this._prismaService.productReview.findMany({
+      orderBy: { createdOnUtc: 'desc' },
       where: { productId },
-    });
+      include: CreateReviewRelations(),
+    })) as ProductReviewModel[];
+  }
+
+  async getReviewByProductId(productId: string) {
+    return (await this._prismaService.productReview.findFirst({
+      orderBy: { createdOnUtc: 'desc' },
+      where: { productId },
+      include: CreateReviewRelations(),
+    })) as ProductReviewModel;
   }
 
   async getLatestReviews(): Promise<ProductReviewModel[]> {
@@ -42,8 +54,22 @@ export class ReviewService {
     });
   }
 
-  async createReview(review: any) {
-    return await this._prismaService.productReview.create({ data: review });
+  async createReview(review: ProductReviewModel) {
+    const result = await this._prismaService.productReview.create({
+      data: {
+        id: review.id,
+        rating: review.rating,
+        comment: review.comment,
+        userId: review.userId,
+        productId: review.productId,
+        createdOnUtc: review.createdOnUtc,
+      },
+    });
+    if (result) {
+      return await this.getReviewByProductId(review.productId);
+    } else {
+      throw new Error('Review not created');
+    }
   }
 
   async updateReview(review: any) {
