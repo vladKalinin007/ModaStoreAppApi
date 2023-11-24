@@ -1,5 +1,4 @@
 import { SeenProductList } from 'domain/models/customer/seen-product-list.model';
-import { SeenProductDto } from './seen-product.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class SeenProductListDto {
@@ -7,28 +6,19 @@ export class SeenProductListDto {
   id: string;
 
   @ApiProperty()
-  seenProudcts: SeenProductDto[];
-
-  constructor(seenProductList: SeenProductList) {
-    this.id = seenProductList.id;
-
-    this.seenProudcts = seenProductList.seenProducts.map((seenProduct) =>
-      SeenProductDto.from(seenProduct),
-    );
-  }
-
-  toModel() {
-    return new SeenProductList(this.id, this.seenProudcts);
-  }
+  seenProductsIds: string[];
 
   static toModel(seenProductListDto: SeenProductListDto): SeenProductList {
-    return new SeenProductList(
-      seenProductListDto.id,
-      seenProductListDto.seenProudcts,
-    );
+    return {
+      id: seenProductListDto.id,
+      seenProductsIds: seenProductListDto.seenProductsIds.map((id) => id),
+    } as SeenProductList;
   }
 
-  static from(seenProductList: SeenProductList): SeenProductListDto {
-    return new SeenProductListDto(seenProductList);
+  static fromModel(seenProductList: SeenProductList): SeenProductListDto {
+    return {
+      id: seenProductList.id,
+      seenProductsIds: seenProductList.seenProductsIds.map((id) => id),
+    } as SeenProductListDto;
   }
 }

@@ -20,18 +20,11 @@ export class SeenProductService {
     return (await this.cacheService.get(id)) as SeenProductList;
   }
 
-  async addProductToSeenProductList(
-    id: string,
-    seenProductsList: SeenProductList,
-  ) {
-    await this.cacheService.set(id, seenProductsList, 30 * 24 * 60 * 60);
-    return this.getSeenProductList(id);
-  }
-
   async updateSeenProducts(
+    id: string,
     seenProduct: SeenProductList,
   ): Promise<SeenProductList> {
-    await this.cacheService.set(seenProduct.id, seenProduct, 30 * 24 * 60 * 60);
+    await this.cacheService.set(id, seenProduct, 30 * 24 * 60 * 60);
     return this.getSeenProductList(seenProduct.id);
   }
 

@@ -13,6 +13,6 @@ export class GetSeenProductListHandler
     const seenProductList = await this._seenProductService.getSeenProductList(
       query.id,
     );
-    return SeenProductListDto.from(seenProductList);
+    return SeenProductListDto.fromModel(seenProductList);
   }
 }

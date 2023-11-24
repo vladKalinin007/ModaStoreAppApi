@@ -5,8 +5,5 @@ export class UpdateSeenProductCommand implements ICommand {
   constructor(
     public readonly seenProductListDto: SeenProductListDto,
     public readonly id: string,
-  ) {
-    this.seenProductListDto = seenProductListDto;
-    this.seenProductListDto.id = id;
-  }
+  ) {}
 }

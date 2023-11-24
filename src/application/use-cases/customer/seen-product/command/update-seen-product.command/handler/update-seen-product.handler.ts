@@ -10,10 +10,15 @@ export class UpdateSeenProductHandler
   constructor(private readonly _seenProductService: SeenProductService) {}
 
   async execute(command: UpdateSeenProductCommand) {
-    const result = await this._seenProductService.updateSeenProducts(
-      SeenProductListDto.toModel(command.seenProductListDto),
+    const seenProductList = SeenProductListDto.toModel(
+      command.seenProductListDto,
     );
+    const updatedSeenProductList =
+      await this._seenProductService.updateSeenProducts(
+        seenProductList.id,
+        seenProductList,
+      );
 
-    return SeenProductListDto.from(result);
+    return SeenProductListDto.fromModel(updatedSeenProductList);
   }
 }
