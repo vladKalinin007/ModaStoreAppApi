@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AppUserModel } from 'domain/models/identity/app-user.model';
 import * as bcrypt from 'bcrypt';
 import { CurrentUserService } from './current-user.service';
+import { AddressService } from '../customer/address.service';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,7 @@ export class AuthService {
     private readonly _prismaService: PrismaService,
     private readonly _jwtService: JwtService,
     private readonly _currentUser: CurrentUserService,
+    private readonly _addressService: AddressService,
   ) {}
 
   async validate(email: string, password: string) {
@@ -67,6 +69,8 @@ export class AuthService {
     if (!newUser) {
       throw new Error('User could not be created');
     }
+
+    this._addressService.createNewAddress(newUser.id);
 
     this._currentUser.set(user.id);
 

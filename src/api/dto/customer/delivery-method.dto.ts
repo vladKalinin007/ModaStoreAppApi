@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { OrderDto } from '..';
+import { DeliveryMethodModel } from 'domain/models/customer/delivery-method.model';
 
 export class DeliveryMethodDto {
   @ApiProperty({ required: true })
@@ -31,4 +32,14 @@ export class DeliveryMethodDto {
   @ApiProperty({ required: true, type: () => OrderDto })
   @IsOptional()
   orders: OrderDto[];
+
+  static fromModel(model: DeliveryMethodModel): DeliveryMethodDto {
+    return {
+      id: model.id,
+      shortName: model.shortName,
+      deliveryTime: model.deliveryTime,
+      description: model.description,
+      price: model.price,
+    } as DeliveryMethodDto;
+  }
 }

@@ -47,13 +47,19 @@ export class PaymentService {
     let intent;
 
     if (!basket.paymentIntentId) {
-      const options = {
+      const options: Stripe.PaymentIntentCreateParams = {
         amount:
           basket.items.reduce((acc, i) => acc + i.quantity * i.price, 0) +
           shippingPrice,
         currency: 'usd',
-        payment_method_types: ['card'],
+        payment_method: 'pm_card_visa',
         confirm: true,
+        payment_method_options: {
+          card: {
+            request_three_d_secure: 'any',
+          },
+        },
+        return_url: 'https://your-website.com/your-return-page',
       };
 
       intent = await stripe.paymentIntents.create(options);

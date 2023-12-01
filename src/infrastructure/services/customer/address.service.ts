@@ -17,24 +17,11 @@ export class AddressService {
       where: { appUserId: id },
     })) as AddressModel;
 
-    if (address) {
-      return address;
-    } else {
-      const newAddress = {
-        id: uuidv4(),
-        firstName: '',
-        lastName: '',
-        street: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        appUserId: id,
-      } as AddressModel;
-
-      this.createAddress(newAddress);
-
-      return this.getUserAddress();
+    if (!address) {
+      throw new Error('Address not found');
     }
+
+    return address;
   }
 
   async createAddress(address?: AddressModel) {
@@ -50,6 +37,21 @@ export class AddressService {
         appUserId: address.appUserId,
       },
     });
+  }
+
+  async createNewAddress(userId: string) {
+    return (await this._prismaService.address.create({
+      data: {
+        id: uuidv4(),
+        firstName: '',
+        lastName: '',
+        street: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        appUserId: userId,
+      },
+    })) as AddressModel;
   }
 
   async updateAddress(address: AddressModel) {

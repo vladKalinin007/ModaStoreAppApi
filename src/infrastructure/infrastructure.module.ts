@@ -25,6 +25,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { SessionStore } from './services/identity/session.store';
 import { OrderService } from './services/customer/order.service';
+import { ProductAttributesService } from './services/catalog/product-attributes.service';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { OrderService } from './services/customer/order.service';
     JwtStrategy,
     SessionStore,
     OrderService,
+    ProductAttributesService,
   ],
   exports: [
     ProductService,
@@ -88,6 +90,7 @@ import { OrderService } from './services/customer/order.service';
     JwtStrategy,
     SessionStore,
     OrderService,
+    ProductAttributesService,
   ],
 })
 export class InfrastructureModule {}

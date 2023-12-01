@@ -9,6 +9,7 @@ import { GetOrdersQuery } from 'application/use-cases/customer/order/queries/get
 import { GetOrderByIdQuery } from 'application/use-cases/customer/order/queries/get-order-by-id.query/query/get-order-by-id.query';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthenticatedGuard } from 'api/guards/authenticated.guard';
+import { GetDeliveryMethodsQuery } from 'application/use-cases/customer/order/queries/get-delivery-methods.query/query/get-delivery-methods.query';
 
 @ApiTags('Order endpoints')
 export class OrderController extends BaseController {
@@ -50,5 +51,10 @@ export class OrderController extends BaseController {
   @Delete('/order/:id')
   async delete(@Param('id') id: string): Promise<void> {
     return await this._commandBus.execute(new DeleteOrderCommand(id));
+  }
+
+  @Get('/deliveryMethods')
+  async getDeliveryMethods() {
+    return await this._queryBus.execute(new GetDeliveryMethodsQuery());
   }
 }

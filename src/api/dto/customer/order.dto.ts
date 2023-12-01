@@ -7,6 +7,7 @@ import {
   IsOptional,
 } from 'class-validator';
 import { AddressDto, DeliveryMethodDto, OrderItemDto } from '..';
+import { OrderModel } from 'domain/models/customer/order.model';
 
 export class OrderDto {
   @ApiProperty({ required: true })
@@ -60,4 +61,18 @@ export class OrderDto {
   @ApiProperty({ required: true, type: () => OrderItemDto })
   @IsOptional()
   orderItems: OrderItemDto[];
+
+  static fromModel(model: OrderModel): OrderDto {
+    return {
+      id: model.id,
+      buyerEmail: model.buyerEmail,
+      orderDate: model.orderDate,
+      subtotal: model.subtotal,
+      status: model.status,
+      paymentIntentId: model.paymentIntentId,
+      shipToAddressId: model.shipToAddressId,
+      deliveryMethodId: model.deliveryMethodId,
+      orderItems: model.orderItems.map((item) => OrderItemDto.fromModel(item)),
+    } as OrderDto;
+  }
 }

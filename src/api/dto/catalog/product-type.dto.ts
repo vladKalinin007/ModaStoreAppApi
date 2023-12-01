@@ -27,13 +27,11 @@ export class ProductTypeDto {
   @IsOptional()
   categoryProductTypes: CategoryProductTypeDto[];
 
-  constructor(id: string, name: string, description: string) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-  }
-
-  static fromModel(model: ProductTypeModel) {
-    return new ProductTypeDto(model.id, model.name, model.description);
+  static fromModel(model: ProductTypeModel): ProductTypeDto {
+    return {
+      id: model.id,
+      name: model.name,
+      description: model.description,
+    } as ProductTypeDto;
   }
 }

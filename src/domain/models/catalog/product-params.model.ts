@@ -43,6 +43,16 @@ export class ProductParams {
   @IsString()
   categoryId?: string;
 
+  @ApiPropertyOptional({ description: 'Category' })
+  @IsOptional()
+  @IsString()
+  category?: string;
+
+  @ApiPropertyOptional({ description: 'Sort' })
+  @IsOptional()
+  @IsString()
+  sort?: string;
+
   @ApiPropertyOptional({ description: 'Color ID' })
   @IsOptional()
   @IsString()

@@ -7,6 +7,7 @@ import { AuthService } from 'infrastructure/services/identity/auth.service';
 import { CurrentUserService } from 'infrastructure/services/identity/current-user.service';
 import { SessionStore } from 'infrastructure/services/identity/session.store';
 import { LocalStrategy } from 'infrastructure/strategies/local.strategy';
+import { AddressService } from '../services/customer/address.service';
 
 @Module({
   imports: [PassportModule.register({ session: true })],
@@ -18,6 +19,7 @@ import { LocalStrategy } from 'infrastructure/strategies/local.strategy';
     JwtService,
     CurrentUserService,
     SessionStore,
+    AddressService,
   ],
   exports: [
     PassportModule,
@@ -25,6 +27,7 @@ import { LocalStrategy } from 'infrastructure/strategies/local.strategy';
     LocalStrategy,
     SessionSerializer,
     SessionStore,
+    AddressService,
   ],
 })
 export class AuthModule {}

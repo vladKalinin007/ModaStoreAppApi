@@ -10,6 +10,9 @@ import { UpdateProductCommand } from 'application/use-cases/catalog/product/comm
 import { DeleteProductCommand } from 'application/use-cases/catalog/product/commands/update-product.command/command/delete-product.command';
 import { ProductParams } from 'domain/models/catalog/product-params.model';
 import { Pagination } from 'domain/models/common/pagination.model';
+import { GetProductColorsQuery } from 'application/use-cases/catalog/product/queries/get-product-colors.query/query/get-product-colors.query';
+import { GetProductSizesQuery } from 'application/use-cases/catalog/product/queries/get-product-sizes.query/query/get-products-sizes.query';
+import { GetProductAttributesQuery } from 'application/use-cases/catalog/product/queries/get-product-attributes.query/query/get-product-attributes.query';
 
 @ApiTags('Product endpoints')
 export class ProductController extends BaseController {
@@ -35,6 +38,23 @@ export class ProductController extends BaseController {
   @Get('/products/:id')
   async getProductById(@Param('id') id: string): Promise<ProductDto> {
     return this._queryBus.execute(new GetProductByIdQuery(id));
+  }
+
+  @Get('/products/colors/:category')
+  async getProductColors(@Param('category') category: string) {
+    return await this._queryBus.execute(new GetProductColorsQuery(category));
+  }
+
+  @Get('/products/sizes/:category')
+  async getProductSizes(@Param('category') category: string) {
+    return await this._queryBus.execute(new GetProductSizesQuery(category));
+  }
+
+  @Get('/products/attributes/:category')
+  async getProductAttributes(@Param('category') category: string) {
+    return await this._queryBus.execute(
+      new GetProductAttributesQuery(category),
+    );
   }
 
   @Post('/products')

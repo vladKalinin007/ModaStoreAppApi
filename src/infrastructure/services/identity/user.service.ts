@@ -27,6 +27,15 @@ export class UserService {
     })) as AppUserModel;
   }
 
+  async getUserEmail(userId: string) {
+    return (
+      await this._prismaService.appUser.findUnique({
+        where: { id: userId },
+        select: { email: true },
+      })
+    ).email;
+  }
+
   async getAllUsers() {
     return (await this._prismaService.appUser.findMany()) as AppUserModel[];
   }

@@ -8,6 +8,7 @@ import { UserService } from '../identity/user.service';
 import { v4 as uuid } from 'uuid';
 import { OrderStatus } from 'domain/enums/customer/order-status.enum';
 import { AddressService } from './address.service';
+import { CurrentUserService } from '../identity/current-user.service';
 
 @Injectable()
 export class OrderService {
@@ -17,6 +18,7 @@ export class OrderService {
     private readonly _prismaService: PrismaService,
     private readonly _userService: UserService,
     private readonly _addressService: AddressService,
+    private readonly _currentUser: CurrentUserService,
   ) {}
 
   async getOrders() {
@@ -38,6 +40,21 @@ export class OrderService {
         deliveryMethod: true,
       },
     });
+  }
+
+  async getOrdersByUserEmail() {
+    const userId = await this._currentUser.get();
+    const buyerEmail = await this._userService.getUserEmail(userId);
+    return (await this._prismaService.order.findMany({
+      where: {
+        buyerEmail: buyerEmail,
+      },
+      include: {
+        orderItems: true,
+        deliveryMethod: true,
+        shipToAddress: true,
+      },
+    })) as OrderModel[];
   }
 
   async createOrder(basketId: string) {

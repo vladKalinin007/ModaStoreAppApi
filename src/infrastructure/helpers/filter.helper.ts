@@ -4,25 +4,26 @@ import { ProductParams } from 'domain/models/catalog/product-params.model';
 export function createFilter(params: ProductParams) {
   const filter: any = {};
 
-  if (params.pageIndex && params.pageSize) {
-    filter.skip = (params.pageIndex - 1) * params.pageSize;
-    filter.take = params.pageSize;
-  }
-
   if (params.id) {
     filter.id = params.id;
   }
 
   if (params.brandId) {
-    filter.brandId = params.brandId;
+    filter.ProductBrandId = params.brandId;
   }
 
   if (params.typeId) {
-    filter.typeId = params.typeId;
+    filter.ProductTypeId = params.typeId;
   }
 
   if (params.categoryId) {
     filter.categoryId = params.categoryId;
+  }
+
+  if (params.category) {
+    filter.category = {
+      name: params.category,
+    };
   }
 
   if (params.colorId) {
@@ -88,16 +89,16 @@ export function createFilter(params: ProductParams) {
     };
   }
 
-  if (params.minPrice) {
-    filter.price = {
-      gte: new Prisma.Decimal(+params.minPrice),
-    };
-  }
+  if (params.minPrice || params.maxPrice) {
+    filter.price = {};
 
-  if (params.maxPrice) {
-    filter.price = {
-      lte: new Prisma.Decimal(+params.maxPrice),
-    };
+    if (params.minPrice) {
+      filter.price.gte = new Prisma.Decimal(+params.minPrice);
+    }
+
+    if (params.maxPrice) {
+      filter.price.lte = new Prisma.Decimal(+params.maxPrice);
+    }
   }
 
   return filter;

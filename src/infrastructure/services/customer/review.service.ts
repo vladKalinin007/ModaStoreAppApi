@@ -49,9 +49,10 @@ export class ReviewService {
 
   async getReviewsByUserId() {
     const userId = await this.getUserId();
-    return await this._prismaService.productReview.findMany({
+    return (await this._prismaService.productReview.findMany({
       where: { userId },
-    });
+      include: CreateReviewRelations(),
+    })) as ProductReviewModel[];
   }
 
   async createReview(review: ProductReviewModel) {

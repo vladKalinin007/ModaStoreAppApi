@@ -22,8 +22,8 @@ export class ProductTypeController extends BaseController {
     return await this._queryBus.execute(new GetProductTypeByIdQuery(id));
   }
 
-  @Get('productTypes/:category')
-  async getProductTypeByCategory(@Param('category') category: string) {
+  @Get('productTypes/category/:name')
+  async getProductTypeByCategory(@Param('name') category: string) {
     return await this._queryBus.execute(
       new GetProductTypeByCategoryQuery(category),
     );
