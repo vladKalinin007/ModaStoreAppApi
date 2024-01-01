@@ -22,14 +22,15 @@ async function bootstrap() {
       store: app.get(SessionStore),
       secret: 'my-secret',
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: false,
       cookie: {
         domain:
           process.env.NODE_ENV === 'development'
             ? 'localhost'
             : '.up.railway.app',
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: 'lax',
+        secure: false,
+        httpOnly: false,
       },
     }),
   );
