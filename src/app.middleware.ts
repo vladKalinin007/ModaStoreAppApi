@@ -1,7 +1,4 @@
 import { INestApplication } from '@nestjs/common';
-// import * as passport from 'passport';
-// import * as session from 'express-session';
-// import * as cookieParser from 'cookie-parser';
 
 export function middleware(app: INestApplication): INestApplication {
   app.use((req, res, next) => {
@@ -12,20 +9,8 @@ export function middleware(app: INestApplication): INestApplication {
     }
   });
 
-  // app.use(cookieParser());
-  // app.use(
-  //   session({
-  //     secret: 'my-secret',
-  //     resave: false,
-  //     saveUninitialized: false,
-  //   }),
-  // );
-
-  // app.use(passport.initialize());
-  // app.use(passport.session());
-
   app.enableCors({
-    origin: true,
+    origin: ['http://localhost:4200', 'https://moda-store-client.vercel.app'],
     credentials: true,
   });
 
