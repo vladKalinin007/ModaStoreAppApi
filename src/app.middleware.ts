@@ -10,7 +10,7 @@ export function middleware(app: INestApplication): INestApplication {
   });
 
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://moda-store-client.vercel.app'],
+    origin: true,
     credentials: true,
   });
 

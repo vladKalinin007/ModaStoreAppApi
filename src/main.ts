@@ -25,6 +25,8 @@ async function bootstrap() {
       saveUninitialized: false,
       cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000,
+        domain: 'moda-store-client.vercel.app',
+        secure: true,
       },
     }),
   );
