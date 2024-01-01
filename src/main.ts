@@ -16,8 +16,6 @@ async function bootstrap() {
 
   middleware(app);
 
-  const isProduction = process.env.NODE_ENV === 'production';
-
   app.use(cookieParser());
   app.use(
     session({
@@ -26,9 +24,12 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: true,
       cookie: {
+        domain:
+          process.env.NODE_ENV === 'development'
+            ? 'localhost'
+            : '.up.railway.app',
         maxAge: 7 * 24 * 60 * 60 * 1000,
         sameSite: 'lax',
-        secure: isProduction,
       },
     }),
   );
