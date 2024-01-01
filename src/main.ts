@@ -27,7 +27,7 @@ async function bootstrap() {
         domain:
           process.env.NODE_ENV === 'development'
             ? 'localhost'
-            : '.moda-store-client.vercel.app',
+            : '.up.railway.app',
         maxAge: 7 * 24 * 60 * 60 * 1000,
         secure: false,
         httpOnly: false,
