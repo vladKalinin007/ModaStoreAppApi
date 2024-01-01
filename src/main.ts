@@ -24,7 +24,10 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        domain: process.env.NODE_ENV === 'development' ? 'localhost' : '.app',
+        domain:
+          process.env.NODE_ENV === 'development'
+            ? 'localhost'
+            : '.moda-store-client.vercel.app',
         maxAge: 7 * 24 * 60 * 60 * 1000,
         secure: false,
         httpOnly: false,
