@@ -16,6 +16,8 @@ async function bootstrap() {
 
   middleware(app);
 
+  const isProduction = process.env.NODE_ENV === 'production';
+
   app.use(cookieParser());
   app.use(
     session({
@@ -25,6 +27,8 @@ async function bootstrap() {
       saveUninitialized: true,
       cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: isProduction ? 'none' : 'lax',
+        secure: isProduction,
       },
     }),
   );
