@@ -22,10 +22,9 @@ async function bootstrap() {
       store: app.get(SessionStore),
       secret: 'my-secret',
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: true,
       cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: 'none',
       },
     }),
   );
