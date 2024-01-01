@@ -16,6 +16,8 @@ import { ProductPicturesModel } from './product-pictures.model';
 import { ProductSizesModel } from './product-sizes.model';
 import { ProductTagsModel } from './product-tags.model';
 import { ProductReviewModel } from './product-review.model';
+import { ColorModel } from '../common/color.model';
+import { SizeModel } from '../common/size.model';
 
 export class ProductModel {
   @IsNotEmpty()
@@ -243,17 +245,25 @@ export class ProductModel {
   @IsOptional()
   productARelations: RelatedProductModel[];
 
+  relatedProducts: string[];
+
   @IsOptional()
   productBRelations: RelatedProductModel[];
 
   @IsOptional()
   productColors: ProductColorsModel[];
 
+  colors: ColorModel[];
+
   @IsOptional()
   productPictures: ProductPicturesModel[];
 
+  pictures: string[];
+
   @IsOptional()
   productSizes: ProductSizesModel[];
+
+  sizes: SizeModel[];
 
   @IsOptional()
   productTags: ProductTagsModel[];

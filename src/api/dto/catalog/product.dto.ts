@@ -8,9 +8,6 @@ import {
   IsBoolean,
 } from 'class-validator';
 import {
-  ProductTypeDto,
-  CategoryDto,
-  ProductBrandDto,
   RelatedProductDto,
   ProductColorsDto,
   ProductPicturesDto,
@@ -22,6 +19,8 @@ import {
 } from '..';
 import { Prisma } from '@prisma/client';
 import { ProductModel } from 'domain/models/catalog/product.model';
+import { SizeModel } from 'domain/models/common/size.model';
+import { ColorModel } from 'domain/models/common/color.model';
 
 export class ProductDto {
   @ApiProperty({ required: true })
@@ -291,31 +290,24 @@ export class ProductDto {
   @IsString()
   ProductBrandId?: string;
 
-  @ApiProperty({ required: false, type: () => ProductTypeDto })
   @IsOptional()
   productType?: string | undefined;
 
-  @ApiProperty({ required: false, type: () => CategoryDto })
   @IsOptional()
   category?: string | undefined;
 
-  @ApiProperty({ required: false, type: () => ProductBrandDto })
   @IsOptional()
   productBrand?: string | undefined;
 
-  @ApiProperty({ required: true, type: () => RelatedProductDto })
   @IsOptional()
   productARelations: RelatedProductDto[];
 
-  @ApiProperty({ required: true, type: () => RelatedProductDto })
   @IsOptional()
   productBRelations: RelatedProductDto[];
 
-  @ApiProperty({ required: true, type: () => ProductColorsDto })
   @IsOptional()
   productColors: ProductColorsDto[];
 
-  @ApiProperty({ required: true, type: () => ProductPicturesDto })
   @IsOptional()
   productPictures: ProductPicturesDto[];
 
@@ -335,15 +327,12 @@ export class ProductDto {
   @IsOptional()
   relatedProducts: string[];
 
-  @ApiProperty({ required: true, type: () => ProductSizesDto })
   @IsOptional()
   productSizes: ProductSizesDto[];
 
-  @ApiProperty({ required: true, type: () => ProductTagsDto })
   @IsOptional()
   productTags: ProductTagsDto[];
 
-  @ApiProperty({ required: true, type: () => ProductReviewDto })
   @IsOptional()
   productReviews: ProductReviewDto[];
 
@@ -351,35 +340,83 @@ export class ProductDto {
     return new ProductDto(product);
   }
 
-  // static toModel(dto: ProductDto): ProductModel {
-  //   return {
-  //     ...dto,
-  //     // productType: dto.productType ? ProductTypeDto.toModel(dto.productType) : undefined,
-  //     // category: dto.category ? CategoryDto.toModel(dto.category) : undefined,
-  //     // productBrand: dto.productBrand ? ProductBrandDto.toModel(dto.productBrand) : undefined,
-  //     // productARelations: dto.productARelations.map((relatedProduct) => {
-  //     //   return RelatedProductDto.toModel(relatedProduct);
-  //     // }),
-  //     // productBRelations: dto.productBRelations.map((relatedProduct) => {
-  //     //   return RelatedProductDto.toModel(relatedProduct);
-  //     // }),
-  //     // productColors: dto.productColors.map((productColor) => {
-  //     //   return ProductColorsDto.toModel(productColor);
-  //     // }),
-  //     // productPictures: dto.productPictures.map((productPicture) => {
-  //     //   return ProductPicturesDto.toModel(productPicture);
-  //     // }),
-  //     // productSizes: dto.productSizes.map((productSize) => {
-  //     //   return ProductSizesDto.toModel(productSize);
-  //     // }),
-  //     // productTags: dto.productTags.map((productTag) => {
-  //     //   return ProductTagsDto.toModel(productTag);
-  //     // }),
-  //     // productReviews: dto.productReviews.map((productReview) => {
-  //     //   return ProductReviewDto.toModel(productReview);
-  //     // }),
-  //   };
-  // }
+  static toModel(product: ProductDto) {
+    return {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      shortDescription: product.shortDescription,
+      price: product.price,
+      oldPrice: new Prisma.Decimal(product.oldPrice),
+      specialPrice: product.specialPrice,
+      discountPercentage: product.discountPercentage,
+      pictureUrl: product.pictureUrl,
+      createdOnUtc: product.createdOnUtc,
+      updatedOnUtc: product.updatedOnUtc,
+      stockQuantity: product.stockQuantity,
+      displayOrder: product.displayOrder,
+      color: product.color,
+      size: product.size,
+      season: product.season,
+      material: product.material,
+      style: product.style,
+      pattern: product.pattern,
+      occasion: product.occasion,
+      sleeve: product.sleeve,
+      neckline: product.neckline,
+      dressLength: product.dressLength,
+      waistline: product.waistline,
+      silhouette: product.silhouette,
+      decoration: product.decoration,
+      closureType: product.closureType,
+      pantClosureType: product.pantClosureType,
+      pantLength: product.pantLength,
+      pantStyle: product.pantStyle,
+      fitType: product.fitType,
+      published: product.published,
+      deleted: product.deleted,
+      isFeatured: product.isFeatured,
+      isCallForPricing: product.isCallForPricing,
+      isOnSale: product.isOnSale,
+      isNew: product.isNew,
+      isBestSeller: product.isBestSeller,
+      isGiftCard: product.isGiftCard,
+      isDownload: product.isDownload,
+      isRecurring: product.isRecurring,
+      isShipEnabled: product.isShipEnabled,
+      isFreeShipping: product.isFreeShipping,
+      isOnHomePage: product.isOnHomePage,
+      isOnSalePage: product.isOnSalePage,
+      allowCustomerReviews: product.allowCustomerReviews,
+      disableBuyButton: product.disableBuyButton,
+      disableWishlistButton: product.disableWishlistButton,
+      disableCompareButton: product.disableCompareButton,
+      showOnHomePage: product.showOnHomePage,
+      showOnSalePage: product.showOnSalePage,
+      ProductTypeId: product.ProductTypeId,
+      CategoryId: product.CategoryId,
+      ProductBrandId: product.ProductBrandId,
+
+      colors: product.colors.map((color) => {
+        return {
+          id: color.id,
+          name: color.name,
+          colorCode: color.colorCode,
+        } as ColorModel;
+      }),
+
+      sizes: product.sizes.map((size) => {
+        return {
+          id: size.id,
+          name: size.name,
+        } as SizeModel;
+      }),
+
+      pictures: product.pictures.map((picture) => picture),
+
+      relatedProducts: product.relatedProducts.map((id) => id),
+    } as ProductModel;
+  }
 
   constructor(product: ProductModel) {
     this.id = product.id;

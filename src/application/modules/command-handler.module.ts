@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { CreateProductHandler } from 'application/use-cases/catalog/product/commands/create-product.command/handler/create-product.handler';
 import { CreateBasketHandler } from 'application/use-cases/customer/basket/commands/create-basket.command/handler/create-basket.handler';
 import { DeleteBasketHandler } from 'application/use-cases/customer/basket/commands/delete-basket.command/handler/delete-basket.handler';
 import { UpdateBasketHandler } from 'application/use-cases/customer/basket/commands/update-basket.command/handler/update-basket.handler';
@@ -37,6 +38,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     UpdateAddressHandler,
     UpdateUserHandler,
     AddReviewHandler,
+    CreateProductHandler,
   ],
   exports: [
     CreateBasketHandler,
@@ -55,6 +57,7 @@ import { InfrastructureModule } from 'infrastructure/infrastructure.module';
     UpdateAddressHandler,
     UpdateUserHandler,
     AddReviewHandler,
+    CreateProductHandler,
   ],
 })
 export class CommandHandlerModule {}
