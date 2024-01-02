@@ -1,7 +1,7 @@
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from './base.controller';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { Body, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { GetUserQuery } from 'application/use-cases/identity/user/queries/get-user.query/query/get-user.query';
 import { DeleteUserCommand } from 'application/use-cases/identity/user/commands/delete-user.command/command/delete-user.command';
 import { GetAddressQuery } from 'application/use-cases/identity/user/queries/get-address.query/query/get-address.query';
@@ -9,7 +9,7 @@ import { UpdateAddressCommand } from 'application/use-cases/identity/user/comman
 import { CheckEmailExistsQuery } from 'application/use-cases/identity/user/queries/check-email-exists.query/query/check-email-exists.query';
 import { UpdateUserCommand } from 'application/use-cases/identity/user/commands/update-user.command/command/update-user.command';
 import { AddressDto, AppUserDto } from 'api/dto';
-import { AuthenticatedGuard } from 'api/guards/authenticated.guard';
+// import { AuthenticatedGuard } from 'api/guards/authenticated.guard';
 import { RegisterCommand } from 'application/use-cases/identity/authentication/commands/register.command/command/register.command';
 import {
   RegisterDto,
@@ -33,30 +33,30 @@ export class UserController extends BaseController {
   }
 
   @Get('user')
-  @UseGuards(AuthenticatedGuard)
+  // @UseGuards(AuthenticatedGuard)
   async get() {
     return await this._queryBus.execute(new GetUserQuery());
   }
 
-  @UseGuards(AuthenticatedGuard)
+  // @UseGuards(AuthenticatedGuard)
   @Put('user')
   async update(@Body() userDto: AppUserDto) {
     return await this._commandBus.execute(new UpdateUserCommand(userDto));
   }
 
-  @UseGuards(AuthenticatedGuard)
+  // @UseGuards(AuthenticatedGuard)
   @Delete('user/:id')
   async delete(@Param('id') id: string) {
     return await this._commandBus.execute(new DeleteUserCommand(id));
   }
 
-  @UseGuards(AuthenticatedGuard)
+  // @UseGuards(AuthenticatedGuard)
   @Get('user/address')
   async getAddress() {
     return await this._queryBus.execute(new GetAddressQuery());
   }
 
-  @UseGuards(AuthenticatedGuard)
+  // @UseGuards(AuthenticatedGuard)
   @Put('user/address')
   async updateAddress(@Body() addressDto: AddressDto) {
     return await this._commandBus.execute(new UpdateAddressCommand(addressDto));
